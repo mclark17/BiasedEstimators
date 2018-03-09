@@ -15,11 +15,13 @@ This report analyzes what it takes to become a March Madness Champion. We are ta
 \section*{Introduction}
 Throughout this report, we will analyze past data on March Madness teams, their seasons, and their performance in the tournament. We have gathered data from kaggle.com and broken it down to find the most useful predictors of a team winning the tournament.
 \section*{Data Summary}
-On Kaggle's website, we found data that gave us a look at the teams who are qualified for the March Madness tournament. Each team is assigned a four digit code that is consistent from season to season and in each data set. This allows us to easily manipulate and analyze the data.\\
+On Kaggle's website, we found data that gave us a look at the teams who qualified for the March Madness tournament. Each team is assigned a four digit code that is consistent from season to season in each data set. This allows us to easily manipulate and analyze the data.\\
 
 We begin by looking at the data that has been collected season to season.\\
 
-We follow up by looking at the data from previous tournaments to see which factors effect a team's chances of winning.
+We follow up by looking at the data from previous tournaments to see which factors effect a team's chances of winning.\\
+\subsection*{Regular Season Data}
+Part of our analysis comes from regular season data of 71,241 NCAA divison 1 games from 2003 to 20016. The data available are game statistics of winning and losing teams, such as field goals made, rebounds, assists, etc. For this part of the analysis we wanted to determine particular characteristics of winning teams in the regular season visible on the stat sheet. This part was used to help determine what are the best predictors of a winning team. In order to do so, we thought the ideal comparison would be winning team statistics compared to average team statistics. We computed this difference for the following statistics: field goal, three point, and free throw percentage, rebounds, assists, turnovers, steals, personal fouls, and blocks. The first three statistics are percentages while the rest are averages per game.  
 \section*{Pre-Analysis}
 \section*{Proposed Model}
 
