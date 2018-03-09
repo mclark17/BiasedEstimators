@@ -1,13 +1,20 @@
 x=paste(getwd(),"/Github/BiasedEstimators/455Project",sep="")
 setwd(x)
 library("ggplot2", lib.loc="~/R/win-library/3.4")
+library("plyr", lib.loc="~/R/win-library/3.4")
 require(ggplot2)
 mydata=read.csv("RegularSeasonDetailedResults.csv")
 losingData= read.csv("LosingDataDetailedRegularSeason.csv")
 winningData = read.csv("WinningDataDetailedRegularSeason.csv")
 teamInfo = read.csv("Teams.csv")
 OGseeds = read.csv("TourneySeeds.csv")
-
+tourneyCResults = read.csv("TourneyCompactResults.csv")
+twn = tourneyCResults
+twn['Wteam'] = teamInfo[ match(twn[['Wteam']],teamInfo[['Team_Id']]),'Team_Name']
+twn['Lteam'] = teamInfo[ match(twn[['Lteam']],teamInfo[['Team_Id']]),'Team_Name']
+unqTt = unique(twn$Wteam)
+other = unique(twn$Lteam)
+unqTt = intersect(unqTt,other)
 savePlot = function(name,myPlot)
 {
   pdf(name)
@@ -33,9 +40,18 @@ holdData = ggplot(topQuarter,aes(x=Team))+geom_bar(bins=length(upperTeams),col="
 counts = ggplot_build(holdData)$data[[1]]$count
 toBeSaved = ggplot(topQuarter,aes(x=Team,fill=Seed))+ geom_bar(bins=length(upperTeams),col="grey",center=0)+ 
   coord_flip() + 
-  ggtitle("History of Success") 
+  ggtitle("History of Success(1985-2015)") 
+
+freqData = ddply(twn,.(Wteam),summarise,freq=length(Wteam))
+thresh = freqData$freq>10
+newData = freqData[freqData$freq>10,]
+#freqData$filteredEntries = reorder(freqData$filteredEntries,-freqData$freq)
+preformingTeams = ggplot(data=newData,aes(x=Wteam,y=freq))+ geom_bar(stat="identity",col="grey")+ 
+  coord_flip() + 
+  ggtitle("History of Success(1985-2015)") 
 savePlot("HistOfSuccess.pdf",toBeSaved)
-  
+savePlot("HistOfSuccess2.pdf",preformingTeams)
+
   #scale_x_continuous(breaks=topQuarter$Team) 
 
 #ggplot(topQuarter,aes(y=Count,x=Team,fill=Seed))+geom_histogram(bins=length(upperTeams),col="grey",center=0)+
