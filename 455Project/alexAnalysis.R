@@ -43,20 +43,34 @@ getConfData = function(prefix)
 getConfData('W')
 conf = c('W','X','Y','Z')
 counter = 1
+holdAll = NULL
 while(counter<5)
 {
-  
   topQuarter=getConfData(conf[counter])
+  topQuarter$Seed <- gsub("[A-z]", "", topQuarter$Seed)
+  #topQuarter<- within(topQuarter,Seed <- factor(Seed, 
+  #                                      levels=names(sort(table(Seed), 
+  #
+  #decreasing=TRUE))))
+  topQuarter$Team <- reorder(topQuarter$Team,topQuarter$Seed,length)
+  
+  if(counter==1)
+  {
+    holdAll=topQuarter
+  }
+  else
+  {
+    holdAll = rbind(holdAll,topQuarter)
+  }
   fileName =  paste(conf[counter],"ConfLeader.pdf",sep="")
-  title = paste(conf[counter]," Conference Leaders (1985-2015)")
+  title = paste(conf[counter]," Region Leaders (1985-2015)")
   counter=counter+1
   justCounts=topQuarter$Team
   
   teamIDs=teamInfo$Team_Id
   upperTeams=unique(topQuarter$Team)
   #ggplot(topQuarter,aes(Team))+geom_histogram(breaks=upperTeams,boundary=0.5,width=1)
-  holdData = ggplot(topQuarter,aes(x=Team))+geom_bar(bins=length(upperTeams),col="grey",center=0)
-  counts = ggplot_build(holdData)$data[[1]]$count
+  
   
   toBeSaved = ggplot(topQuarter,aes(x=Team,fill=Seed))+ geom_bar(bins=length(upperTeams),col="grey",center=0)+ 
     coord_flip() + 
@@ -64,6 +78,8 @@ while(counter<5)
   savePlot(fileName,toBeSaved)
   
 }  
+holdData = ggplot(upperTeam,aes(x=Team))+geom_bar(bins=length(upperTeams),col="grey",center=0)
+counts = ggplot_build(holdData)$data[[1]]$count
 freqData = ddply(twn,.(Wteam),summarise,freq=length(Wteam))
 thresh = freqData$freq>10
 newData = freqData[freqData$freq>10,]
@@ -73,6 +89,12 @@ preformingTeams = ggplot(data=newData,aes(x=Wteam,y=freq))+ geom_bar(stat="ident
   ggtitle("History of Success(1985-2015)") 
 savePlot("HistOfSuccess2.pdf",preformingTeams)
 
+holdAll$Team <- reorder(holdAll$Team,holdAll$Seed,length)
+
+toBeSaved = ggplot(holdAll,aes(x=Team,fill=Seed))+ geom_bar(bins=length(upperTeams),col="grey",center=0)+ 
+  coord_flip() + 
+  ggtitle("Overall Leaders (1985-2015)") 
+savePlot("OverLeaders.pdf",toBeSaved)
 
   #scale_x_continuous(breaks=topQuarter$Team) 
 
