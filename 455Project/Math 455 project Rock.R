@@ -15,10 +15,10 @@ mean(WFT)
 summary(WFT)
 y<-data.frame(WFG,LFG,WTHREEP,LTHREEP,WFT,LFT)
 
-boxplot(y,border=c("blue","red","blue","red","blue","red"),horizontal = TRUE,axes=FALSE,main="Winning and Losing Shooting Percentages")
+boxplot(y,border=c("blue","red","blue","red","blue","red"),horizontal = TRUE,axes=FALSE,main="Season Shooting Percentages")
 axis(2,at=c(1.5,3.5,5.5),labels = c("Field Goal","Three Pointers","Free Throws"))
 axis(1)
-legend(x=0.83,y=2.2,legend = c("winners","losers"),fill=c("blue","red"))
+legend(x=0.83,y=2.2,legend = c("Winners","Losers"),fill=c("blue","red"))
 ?legend
               
 WRPG<-(x$Wdr)+(x$Wor)
