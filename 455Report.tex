@@ -92,6 +92,16 @@ Blocks          3.839110  2.868587
 Personal Fouls 17.477099 19.867829
 \end{verbatim}
 The only particularly noticeable differences are among rebound and assists. This is intuitive as these actions occur much more frequently during the course of a basketball game. Based on these results, we would not include turnovers, steals, blocks, and personal fouls into our final analysis. The difference between winning and losing teams for these statistics is so marginal theres reason to believe these factors are not as critical as others in determining a teams chances of progressing deep into the tournament.
+\subsection*{Checking Parameters for Normality}
+In order to test potential parameters for normality, we look at the QQ-plots. For field goal percentage, three point percentage, rebounds per game, and assists per game. Due to the large sample size, over 140,000, we do not anticiapte having issues due to the Central Limit Theorem.  
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=.6]{FGnorm.pdf}
+	\includegraphics[scale=.6]{3pnorm.pdf}
+	\includegraphics[scale=.6]{rbnorm.pdf}
+	\includegraphics[scale=.6]{assnorm.pdf}
+\end{figure}
+The only parameter of concern here is the tails of the three point percentage. The minimum and maximum values of this value are 0 and 1, respectively. The issue here lies in the fact that there are several data points with these minimum and maximum values, but there is a gap of values just above the minimum and just below the maximum. For example, for a team to shoot 1 percent on three pointers, the team would have to only hit 1 and attempt 100. This is not plausible. However, a team can only attempt 5 three points and miss all of them, giving them a three point percentage of 0. The same analysis can be made for the maximum value. 
 \subsection*{Tournament Data}
 \begin{figure}[H]
 	\centering

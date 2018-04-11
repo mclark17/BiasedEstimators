@@ -40,10 +40,20 @@ legend(x=31,y=4,legend = c("winners","losers"),fill = c("blue","red"))
 azd<-matrix(c(mean(WFG),mean(LFG),mean(WTHREEP),mean(LTHREEP),0.70668360,0.6701483),
        nrow = 3,byrow = TRUE)
 colnames(azd)<-c("Winners","Losers")
-rownames(azd)<-c("Free Throw","Three Point","Field Goal")
+rownames(azd)<-c("Field Goal","Three Point","Free Throw")
 azd
 
 dpe<-matrix(c(mean(WRPG),mean(LRPG),mean(x$Wast),mean(x$Last),mean(x$Wto),mean(x$Lto),mean(x$Wstl),mean(x$Lstl),mean(x$Wblk),mean(x$Lblk),mean(x$Wpf),mean(x$Lpf)),ncol = 2,byrow = TRUE)
 colnames(dpe)<-c("Winners","Losers")
 rownames(dpe)<-c("Rebounds","Assists","Turnovers","Steals","Blocks","Personal Fouls")
 dpe
+
+fgm<-c(WFG,LFG)
+qqnorm(fgm)
+tpm<-c(WTHREEP,LTHREEP)
+qqnorm(tpm)
+rb<-c(WRPG,LRPG)
+qqnorm(rb)
+ass<-c(x$Wast,x$Last)
+qqnorm(ass)
+
