@@ -41,7 +41,7 @@ getYears = function(allData,years,season)
     teams = season[season$Season==years[index],]$Team
     for(val in 1:length(yData))
     {
-      maxNum[[val]]=c(yData$Lteam[val],yData$Daynum[val])
+      maxNum[val]=c(yData$Lteam[val],yData$Daynum[val])
       print(length(maxNum))
     }
     tot[index] = maxNum
@@ -50,6 +50,10 @@ getYears = function(allData,years,season)
 }
 
 results = getYears(twn,years,newSeeds)
+df <- data.frame(Date=as.Date(character()),
+                 File=character(), 
+                 User=character(), 
+                 stringsAsFactors=FALSE) 
 
 
 
