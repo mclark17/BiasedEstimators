@@ -31,21 +31,26 @@ y1985 = twn[twn$Season == 1985,]
 years = unique(twn$Season)
 wTeamEntries = unique(y1985$Wteam)
 uniqueTeamy = unique(newSeeds[newSeeds$Season==1985,])
+
 getYears = function(allData,years,season)
 {
+  holdStuff = data.frame(matrix(ncol = 3, nrow = 64))
+  colnames(holdStuff)=c("Season","Team","GP")
   tot = list()
+ 
   for(index in 1:length(years))
   {
-    maxNum = list()
     yData = allData[allData$Season == years[index],]
-    teams = season[season$Season==years[index],]$Team
-    for(val in 1:length(yData))
+    teams = unique(yData$Team)
+    for( index2 in 1:32)
     {
-      maxNum[val]=c(yData$Lteam[val],yData$Daynum[val])
-      print(length(maxNum))
+      holdStuff[(index-1)*63 + index2,]$X.Season. = years[index]
+      holdStuff[index2,]$X.Team. = yData[index2,]$Lteam
+      holdStuff[index2,]$X.GP. = 1
+      
     }
-    tot[index] = maxNum
   }
+  print(holdStuff)
   return(tot)
 }
 
