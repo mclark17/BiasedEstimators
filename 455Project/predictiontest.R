@@ -34,7 +34,7 @@ uniqueTeamy = unique(newSeeds[newSeeds$Season==1985,])
 
 getYears = function(allData,years,season)
 {
-  holdStuff = data.frame(matrix(ncol = 3, nrow = 64))
+  holdStuff = data.frame(matrix(ncol = 3, nrow = 64*(2015-1985)))
   colnames(holdStuff)=c("Season","Team","GP")
   tot = list()
  
@@ -44,17 +44,56 @@ getYears = function(allData,years,season)
     teams = unique(yData$Team)
     for( index2 in 1:32)
     {
-      holdStuff[(index-1)*63 + index2,]$X.Season. = years[index]
-      holdStuff[index2,]$X.Team. = yData[index2,]$Lteam
-      holdStuff[index2,]$X.GP. = 1
+      correctPos = (index-1)*64 + index2
+      holdStuff[correctPos,]$Season = years[index]
+      holdStuff[correctPos,]$Team = levels(factor(yData[index2,]$Lteam))
+      holdStuff[correctPos,]$GP = 1
       
     }
+    for( index2 in 33:48)
+    {
+      correctPos = (index-1)*64 + index2
+      holdStuff[correctPos,]$Season = years[index]
+      holdStuff[correctPos,]$Team = levels(factor(yData[index2,]$Lteam))
+      holdStuff[correctPos,]$GP = 2
+      
+    }
+    for( index2 in 49:56)
+    {
+      correctPos = (index-1)*64 + index2
+      holdStuff[correctPos,]$Season = years[index]
+      holdStuff[correctPos,]$Team = levels(factor(yData[index2,]$Lteam))
+      holdStuff[correctPos,]$GP = 3
+      
+    }
+    for( index2 in 57:60)
+    {
+      correctPos = (index-1)*64 + index2
+      holdStuff[correctPos,]$Season = years[index]
+      holdStuff[correctPos,]$Team = levels(factor(yData[index2,]$Lteam))
+      holdStuff[correctPos,]$GP = 4
+    }
+    for( index2 in 61:62)
+    {
+      correctPos = (index-1)*64 + index2
+      holdStuff[correctPos,]$Season = years[index]
+      holdStuff[correctPos,]$Team = levels(factor(yData[index2,]$Lteam))
+      holdStuff[correctPos,]$GP = 5
+    }
+    correctPos = (index-1)*64 + 63
+    holdStuff[correctPos,]$Season = years[index]
+    holdStuff[correctPos,]$Team = levels(factor(yData[63,]$Lteam))
+    holdStuff[correctPos,]$GP = 6
+    holdStuff[correctPos+1,]$Season = years[index]
+    holdStuff[correctPos+1,]$Team = levels(factor(yData[63,]$Wteam))
+    holdStuff[correctPos+1,]$GP = 6
   }
   print(holdStuff)
-  return(tot)
+  return(holdStuff)
 }
 
 results = getYears(twn,years,newSeeds)
+write.csv(results,'85to15Data.csv')
 df <- data.frame(Date=as.Date(character()),
                  File=character(), 
                  User=character(), 
