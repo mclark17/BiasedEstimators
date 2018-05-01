@@ -92,13 +92,74 @@ getYears = function(allData,years,season)
   return(holdStuff)
 }
 
-results = getYears(twn,years,newSeeds)
-write.csv(results,'85to15Data.csv')
-df <- data.frame(Date=as.Date(character()),
-                 File=character(), 
-                 User=character(), 
-                 stringsAsFactors=FALSE) 
+ydata3=read.csv("TourneyCompactResults.csv")
 
 
+prefix<-c("GP")
+postfix<-c("03","04","05","06","07","08","09","10","11","12","13","14","15","tot") #no results for 2016
+i<-1
+j<-1
+k<-length(prefix)*length(postfix)
+k<-as.numeric(k)
+colNames<-character(k)
+for(i in 1:length(prefix)){
+  for(j in 1:length(postfix)){
+    colNames[(i-1)*14+j]<-paste(prefix[i],postfix[j],sep="")
+  }
+}
+print(colNames)
+colNames<-append(colNames,"Team",0)
 
+results = data.frame(matrix(ncol=(14+1),nrow=(1464-1100)))
+colnames(results)<-colNames
 
+results[,1] = 1101:1464
+
+#-1 because there is no 2016
+for (y in 1:(length(years)-1)){
+  yData = ydata3[ydata3$Season == years[y],]
+  for(x in 1:length(yData$Season)){
+    aindexw = which(results$Team==yData[x, 3])
+    aindexl = which(results$Team==yData[x, 5])
+    if(is.na(results[aindexw,y+1])) 
+    {
+      results[aindexw,y+1] = 1
+    }
+    else 
+    {
+      results[aindexw,y+1] = results[aindexw,y+1] +1
+    }
+    
+    if(is.na(results[aindexl,y+1])) 
+    {
+      results[aindexl,y+1] = 1
+    }
+    else 
+    {
+      results[aindexl,y+1] = results[aindexl,y+1] +1
+    }
+    
+    if(is.na(results[aindexw,length(results)])) 
+    {
+      results[aindexw,length(results)] = 1
+    }
+    else 
+    {
+      results[aindexw,length(results)] = results[aindexw,length(results)] + 1
+    }
+    
+    if(is.na(results[aindexl,length(results)])) 
+    {
+      results[aindexl,length(results)] = 1
+    }
+    else 
+    {
+      results[aindexl,length(results)] = results[aindexl,length(results)] + 1
+    }
+    
+  }
+} 
+
+results['Team'] = teamInfo[ match(results[['Team']],teamInfo[['Team_Id']]),'Team_Name']
+write.csv(results,'03to15Data.csv')
+#why?
