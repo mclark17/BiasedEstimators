@@ -47,13 +47,23 @@ dpe<-matrix(c(mean(WRPG),mean(LRPG),mean(x$Wast),mean(x$Last),mean(x$Wto),mean(x
 colnames(dpe)<-c("Winners","Losers")
 rownames(dpe)<-c("Rebounds","Assists","Turnovers","Steals","Blocks","Personal Fouls")
 dpe
-
+##checking for normality
 fgm<-c(WFG,LFG)
-qqnorm(fgm)
+qqnorm(fgm,main = "Field Goal Percentages")
 tpm<-c(WTHREEP,LTHREEP)
-qqnorm(tpm)
+qqnorm(tpm,main = "Three Point Percentages")
 rb<-c(WRPG,LRPG)
-qqnorm(rb)
+qqnorm(rb,main = "Rebounds")
 ass<-c(x$Wast,x$Last)
-qqnorm(ass)
+qqnorm(ass,main = "Assists")
+##
+
+
+
+
+
+
+
+
+
 

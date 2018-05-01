@@ -1,4 +1,3 @@
-setwd("C:/Users/Molly/Desktop/455Project")
 
 regSeason <- read.csv('RegularSeasonDetailedResults.csv')
 
@@ -275,36 +274,66 @@ avgScore[1234] <- 46
 avgScore
 order(reg2003$Wteam)
 
-typeof(avgScore)
-avgScore = data.frame(matrix(ncol=15,nrow=(1464-1100)))
-colnames(avgScore) = c("Team","avgScore03","avgScore04","avgScore05","avgScore06","avgScore07","avgScore08","avgScore09","avgScore10","avgScore11","avgScore12","avgScore13","avgScore14","avgScore15","avgScore16")
+
+prefix<-c("avgScore","avgFG","avgTP","avgFT","avgRB","avgASS","avgTO","avgSTL","avgBL","avgPF")
+postfix<-c("03","04","05","06","07","08","09","10","11","12","13","14","15","16")
+i<-1
+j<-1
+k<-length(prefix)*length(postfix)
+k<-as.numeric(k)
+colNames<-character(k)
+for(i in 1:length(prefix)){
+  for(j in 1:length(postfix)){
+    colNames[(i-1)*14+j]<-paste(prefix[i],postfix[j],sep="")
+  }
+}
+print(colNames)
+colNames<-append(colNames,"Team",0)
+
+avgScore = data.frame(matrix(ncol=(10*14+1),nrow=(1464-1100)))
+colnames(avgScore)<-colNames
+
+
 avgScore[,1] = 1101:1464
 years = unique(regSeason$Season)
-yearstoavg = c("Team","avgScore03","avgScore04","avgScore05","avgScore06","avgScore07","avgScore08","avgScore09","avgScore10","avgScore11","avgScore12","avgScore13","avgScore14","avgScore15","avgScore16")
+yearstoavg = colNames
 counter = 2
+tuplecounter<-1
+tuples<-list(c(4,6),c(9,22),c(11,24),c(13,26),c(15,16,28,29),c(17,30),c(18,31),c(19,32),c(20,33),c(21,34))
 for (y in years){
   currentData = regSeason[regSeason$Season==y,]
   curCol = yearstoavg[counter]
   for(x in 1:length(currentData$Season)){
     aindex = which(avgScore$Team==currentData[x, 3])
-    if(is.na(avgScore[aindex,counter])) 
-    {
-      (avgScore[aindex,counter] <- currentData[x, 4])
-    }
-    else 
-    {
-      (avgScore[aindex,counter] <- (avgScore[aindex,counter] + currentData[x, 4])/2)
-    }
     aindex2 = which(avgScore$Team==currentData[x, 5])
-    if(is.na(avgScore[aindex2,counter])) 
+    if(tuplecounter!=5){
+      tpos<-tuples[tuplecounter]
+      wval<-tpos[1]
+      lval<-tpos[2]
+      if(is.na(avgScore[aindex,counter])) 
+      {
+        (avgScore[aindex,counter] <- currentData[x, wval])
+      }
+      else 
+      {
+        (avgScore[aindex,counter] <- (avgScore[aindex,counter] + currentData[x, wval])/2)
+      }
+      
+      if(is.na(avgScore[aindex2,counter])) 
+      {
+        (avgScore[aindex2,counter] <- currentData[x, lval])
+      }
+      else 
+      {
+        (avgScore[aindex2,counter] <- (avgScore[aindex2,counter] + currentData[x, lval])/2)
+      }
+    }## this is for handling offensive and defensive rebounds
+    else  
     {
-      (avgScore[aindex2,counter] <- currentData[x, 6])
-    }
-    else 
-    {
-      (avgScore[aindex2,counter] <- (avgScore[aindex2,counter] + currentData[x, 6])/2)
+    
     }
   }
   counter = counter + 1
+  tuplecounter<-tuplecounter + 1
 } 
 
