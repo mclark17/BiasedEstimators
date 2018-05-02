@@ -3,15 +3,19 @@ tourneyData = read.csv("03to15Data.csv")
 avgData = read.csv("03to16.csv")
 x=cbind(avgData,tourneyData[,3:length(tourneyData)])
 x=x[,-1]
+x
 whatsthis = lm(GPtot~.,data=x[,c(length(x),2:15)])
 cor(x[,2:15])
 avgsZ = x
-avgsZ[2:15][is.na(avgsZ[2:15])]=0
+#avgsZ[2:15][is.na(avgsZ[2:15])]=0
 cor(avgsZ[,2:15])
 #lots of correlation between near consecutive years, makes sense, but useful stuff
 just03 = lm(GP03~avgScore03,avgsZ)
 summary(just03)
 #pretty bad R squared
+
+for(i in c(142:154)) x[is.na(x[ ,i]), i] <- 0
+x
 
 zforGP03nAVG = x
 zforGP03nAVG[2:15][is.na(zforGP03nAVG[2:15])]=0
@@ -29,7 +33,7 @@ summary(morestuff2)
 
 
 
-
+library(faraway)
 
 plot(morestuff2$fitted.values, morestuff2$residuals)
 #fan shaped, nonconstant variance
@@ -38,8 +42,8 @@ plot(morestuff2$fitted.values, morestuff2$residuals)
 boxcox(morestuff2, plotit=TRUE)
 #trying to find the right adjustment
 
-morestuff2Adj <- lm(I((GP03)^(-2/3))~avgScore03+avgFG03+avgTO03,avgsZ)
-summary(morestuff2Adj)
+morestuff2Adj <- lm(I((na.omit(GP03))^(-2/3))~avgScore03+avgFG03+avgTO03,avgsZ)
+sumary(morestuff2Adj)
 #R squared of .1834, adjusted for resids, but lower R-squared
 
 plot(morestuff2Adj$fitted.values, morestuff2Adj$residuals)
@@ -66,11 +70,11 @@ halfnorm(cook)
 #look at cases 4 and 32 as influential points
 
 
+adjData <- avgsZ[-32,]
 
-
-morestuff2Adj2 <- lm(I((GP03)^(-2/3))~avgScore03+avgFG03+avgTO03,avgsZ[-c(4,8,17,32,43,177),])
+morestuff2Adj2 <- lm(I((GP03)^(-2/3))~avgScore03+avgFG03+avgTO03,data=adjData)
 summary(morestuff2Adj2)
-#R squared of .229, slightly worse than the last model
+#R squared of .229, slightly worse than the original model
 
 plot(morestuff2Adj2$fitted.values, morestuff2Adj2$residuals)
 abline(h=0)
