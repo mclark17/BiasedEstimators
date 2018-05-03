@@ -46,6 +46,14 @@ March Madness is an annual NCAA Division 1 basketball tournament. The tournament
 \frametitle{{\textbf{\huge Pre-Analysis}}}
 \end{frame}
 \begin{frame}
+\begin{center}
+	\includegraphics[scale=0.255]{SeasonShotPercent.png}
+	\includegraphics[scale=0.255]{TourneyShotPercent.png}  
+\end{center}
+\footnotesize \center We also analyzed the shooting percentages from different the ranges, looking at season data separate from tournament data. As anticipated, the winning teams averaged higher in all categories, but there are a significant number of outliers in the Season data.
+\frametitle{{\textbf{\huge Pre-Analysis}}}
+\end{frame}
+\begin{frame}
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=.35]{HistOfSuccess.pdf}
@@ -77,6 +85,7 @@ In processing our data to develop the model, we went through a number of steps:
 	\item Eliminate unusable predictors, and search out missing values
 	\item Calculate the averages of each team's stats for each year
 	\item Compile the averages into a new csv file that we could use moving forward
+	\item Develop a process for representing how far a team has made it in the tournament
 \end{itemize}
 \frametitle{{\textbf{\huge Processing}}}
 \end{frame}
