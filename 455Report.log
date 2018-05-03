@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2018.1.21)  3 MAY 2018 00:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2018.1.21)  3 MAY 2018 16:44
 entering extended mode
 **./455Report.tex
 (455Report.tex
@@ -283,20 +283,7 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \float@box=\box28
 \@float@everytoks=\toks17
 \@floatcapt=\box29
-) (455Report.aux
-
-LaTeX Warning: Label `rVals' multiply defined.
-
-
-LaTeX Warning: Label `rVals' multiply defined.
-
-
-LaTeX Warning: Label `rVals' multiply defined.
-
-
-LaTeX Warning: Label `rVals' multiply defined.
-
-)
+) (455Report.aux)
 \openout1 = `455Report.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 22.
@@ -314,7 +301,8 @@ LaTeX Font Info:    ... okay on input line 22.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 22.
 LaTeX Font Info:    ... okay on input line 22.
 LaTeX Font Info:    Try loading font information for OT1+ptm on input line 22.
- ("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\ot1ptm.fd"
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\ot1ptm.fd"
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
 *geometry* driver: auto-detecting
@@ -396,23 +384,276 @@ LaTeX Info: Redefining \nameref on input line 22.
 \@outlinefile=\write3
 \openout3 = `455Report.out'.
 
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: float package is loaded.
+Package caption Info: End \AtBeginDocument code.
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 25.
 
-! I can't write on file `455Report.pdf'.
-Please type another file name for output
-! Emergency stop.
-<to be read again> 
-                   \edef 
-l.22 \begin{document}
-                     
-*** (job aborted, file error in nonstop mode)
+("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\ot1phv.fd"
+File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
+)
+LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10.95> not available
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 25.
+LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <20.74> not available
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 25.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <14.4> on input line 25.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 25.
+LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <14.4> not available
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 32.
 
- 
+Underfull \hbox (badness 10000) in paragraph at lines 33--34
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 39--40
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 41--43
+
+ []
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 46.
+
+Underfull \hbox (badness 10000) in paragraph at lines 44--55
+
+ []
+
+[1
+
+
+{C:/Users/Molly/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <12> not available
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 55.
+
+
+LaTeX Warning: File `SeasonShotPercent.png' not found on input line 66.
+
+
+! Package pdftex.def Error: File `SeasonShotPercent.png' not found: using draft
+ setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.66 ...egraphics[scale=.6]{SeasonShotPercent.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 66.
+("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\ot1pcr.fd"
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+) [2]
+
+LaTeX Warning: File `GameAverages.png' not found on input line 78.
+
+
+! Package pdftex.def Error: File `GameAverages.png' not found: using draft sett
+ing.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.78 	\includegraphics[scale=.6]{GameAverages.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `GameAverages2.png' not found on input line 82.
+
+
+! Package pdftex.def Error: File `GameAverages2.png' not found: using draft set
+ting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.82 ...cludegraphics[scale=.6]{GameAverages2.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `FGnorm.pdf' not found on input line 99.
+
+
+! Package pdftex.def Error: File `FGnorm.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.99 	\includegraphics[scale=.6]{FGnorm.pdf}
+                                            
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+<3pnorm.pdf, id=20, pagebox=cropbox, 307.1475pt x 271.0125pt>
+File: 3pnorm.pdf Graphic file (type pdf)
+<use 3pnorm.pdf>
+Package pdftex.def Info: 3pnorm.pdf  used on input line 100. on input line 100.
+
+Package pdftex.def Info: Requested size: 184.28992pt x 162.60875pt on input lin
+e 100.
+
+LaTeX Warning: File `rbnorm.pdf' not found on input line 101.
+
+
+! Package pdftex.def Error: File `rbnorm.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.101 	\includegraphics[scale=.6]{rbnorm.pdf}
+                                             
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `assnorm.pdf' not found on input line 102.
+
+
+! Package pdftex.def Error: File `assnorm.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.102 	\includegraphics[scale=.6]{assnorm.pdf}
+                                              
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[3]
+
+LaTeX Warning: File `TourneyShotPercent.png' not found on input line 108.
+
+
+! Package pdftex.def Error: File `TourneyShotPercent.png' not found: using draf
+t setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.108 ...raphics[scale=.6]{TourneyShotPercent.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `GameScores.png' not found on input line 113.
+
+
+! Package pdftex.def Error: File `GameScores.png' not found: using draft settin
+g.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.113 	\includegraphics[scale=.6]{GameScores.png}
+                                                 
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+<455Project/XConfLeader.pdf, id=31, pagebox=cropbox, 505.89pt x 505.89pt>
+File: 455Project/XConfLeader.pdf Graphic file (type pdf)
+<use 455Project/XConfLeader.pdf>
+Package pdftex.def Info: 455Project/XConfLeader.pdf  used on input line 120. on
+ input line 120.
+Package pdftex.def Info: Requested size: 379.41655pt x 379.41655pt on input lin
+e 120.
+[4 <./3pnorm.pdf>]
+<455Project/overLeaders.pdf, id=47, pagebox=cropbox, 505.89pt x 505.89pt>
+File: 455Project/overLeaders.pdf Graphic file (type pdf)
+<use 455Project/overLeaders.pdf>
+Package pdftex.def Info: 455Project/overLeaders.pdf  used on input line 127. on
+ input line 127.
+Package pdftex.def Info: Requested size: 379.41655pt x 379.41655pt on input lin
+e 127.
+ [5 <./455Project/XConfLeader.pdf>]
+<455Project/HistOfSuccess2.pdf, id=59, pagebox=cropbox, 505.89pt x 505.89pt>
+File: 455Project/HistOfSuccess2.pdf Graphic file (type pdf)
+<use 455Project/HistOfSuccess2.pdf>
+Package pdftex.def Info: 455Project/HistOfSuccess2.pdf  used on input line 134.
+ on input line 134.
+Package pdftex.def Info: Requested size: 379.41655pt x 379.41655pt on input lin
+e 134.
+ [6 <./455Project/overLeaders.pdf>]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <10.95> on input line 139.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 139.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 139.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 145.
+
+ ("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\omsptm.fd"
+File: omsptm.fd 
+)
+LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10.95> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 145.
+ [7 <./455Project/HistOfSuccess2.pdf>]
+<455Project/YConfLeader.pdf, id=87, pagebox=cropbox, 505.89pt x 505.89pt>
+File: 455Project/YConfLeader.pdf Graphic file (type pdf)
+<use 455Project/YConfLeader.pdf>
+Package pdftex.def Info: 455Project/YConfLeader.pdf  used on input line 158. on
+ input line 158.
+Package pdftex.def Info: Requested size: 379.41655pt x 379.41655pt on input lin
+e 158.
+<455Project/WConfLeader.pdf, id=88, pagebox=cropbox, 505.89pt x 505.89pt>
+File: 455Project/WConfLeader.pdf Graphic file (type pdf)
+<use 455Project/WConfLeader.pdf>
+Package pdftex.def Info: 455Project/WConfLeader.pdf  used on input line 165. on
+ input line 165.
+Package pdftex.def Info: Requested size: 379.41655pt x 379.41655pt on input lin
+e 165.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 169.
+ [8 <./455Project/YConfLeader.pdf>] [9 <./455Project/WConfLeader.pdf>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 169.
+ (455Report.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 169.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 169.
+Package rerunfilecheck Info: File `455Report.out' has not changed.
+(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 169.
+ ) 
 Here is how much of TeX's memory you used:
- 8468 strings out of 493312
- 140236 string characters out of 3138899
- 320573 words of memory out of 3000000
- 11975 multiletter control sequences out of 15000+200000
- 4447 words of font info for 16 fonts, out of 3000000 for 9000
+ 8723 strings out of 493312
+ 144241 string characters out of 3138899
+ 322391 words of memory out of 3000000
+ 12149 multiletter control sequences out of 15000+200000
+ 18644 words of font info for 42 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,1n,51p,8822b,137s stack positions out of 5000i,500n,10000p,200000b,50000s
-!  ==> Fatal error occurred, no output PDF file produced!
+ 41i,8n,51p,8822b,374s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}<C:/Program Files/Mi
+KTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9
+/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/ty
+pe1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publi
+c/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts
+/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/courier/ucrr8a.pfb>
+<C:/Program Files/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvb8a.pfb><C:/Program Fi
+les/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX 2.9/fo
+nts/type1/urw/times/utmr8a.pfb>
+Output written on 455Report.pdf (9 pages, 2850653 bytes).
+PDF statistics:
+ 148 PDF objects out of 1000 (max. 8388607)
+ 33 named destinations out of 1000 (max. 500000)
+ 31 words of extra memory for PDF output out of 10000 (max. 10000000)
+
