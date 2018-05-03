@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2018.1.21)  1 MAY 2018 22:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2018.1.21)  3 MAY 2018 01:28
 entering extended mode
 **./presentation455.tex
 (presentation455.tex
@@ -1144,13 +1144,53 @@ Package hyperref Warning: Option `pdfauthor' has already been used,
 
 ] [5
 
-] [6
+]
+<GameAverages.png, id=184, 593.96906pt x 409.53pt>
+File: GameAverages.png Graphic file (type png)
+<use GameAverages.png>
+Package pdftex.def Info: GameAverages.png  used on input line 47. on input line
+ 47.
+Package pdftex.def Info: Requested size: 151.46463pt x 104.43188pt on input lin
+e 47.
+<GameAverages2.png, id=185, 593.96906pt x 409.53pt>
+File: GameAverages2.png Graphic file (type png)
+<use GameAverages2.png>
+Package pdftex.def Info: GameAverages2.png  used on input line 47. on input lin
+e 47.
+Package pdftex.def Info: Requested size: 151.46463pt x 104.43188pt on input lin
+e 47.
+ [6
 
-] [7
+ <./GameAverages.png> <./GameAverages2.png>]
+<HistOfSuccess.pdf, id=212, pagebox=cropbox, 505.89pt x 505.89pt>
+File: HistOfSuccess.pdf Graphic file (type pdf)
+<use HistOfSuccess.pdf>
+Package pdftex.def Info: HistOfSuccess.pdf  used on input line 54. on input lin
+e 54.
+Package pdftex.def Info: Requested size: 177.06415pt x 177.06415pt on input lin
+e 54.
+ [7
 
-] [8
+ <./HistOfSuccess.pdf>]
+LaTeX Font Info:    Try loading font information for U+msa on input line 70.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 70.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) [8
 
 ] [9
+
+] [10
+
+]
+[11
+
+] [12
 
 ]
 \tf@nav=\write6
@@ -1162,20 +1202,20 @@ Package hyperref Warning: Option `pdfauthor' has already been used,
 \tf@snm=\write8
 \openout8 = `presentation455.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 61.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 61.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 95.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 95.
  (presentation455.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 61.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 61.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 95.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 95.
 Package rerunfilecheck Info: File `presentation455.out' has not changed.
-(rerunfilecheck)             Checksum: C41329BDBC30C2AF96BD759C1A50BD1D;337.
+(rerunfilecheck)             Checksum: BC85C3B9A4D20A752D2FC966CA3CBDF2;333.
  ) 
 Here is how much of TeX's memory you used:
- 17471 strings out of 493312
- 328863 string characters out of 3138899
- 395729 words of memory out of 3000000
- 20594 multiletter control sequences out of 15000+200000
- 14076 words of font info for 29 fonts, out of 3000000 for 9000
+ 17552 strings out of 493312
+ 330216 string characters out of 3138899
+ 396728 words of memory out of 3000000
+ 20647 multiletter control sequences out of 15000+200000
+ 18424 words of font info for 46 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  56i,14n,55p,811b,554s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\Molly\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\
@@ -1183,10 +1223,14 @@ ecrm1000.pk> <C:\Users\Molly\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\
 ec\dpi600\ecrm1095.pk> <C:\Users\Molly\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour
 \jknappen\ec\dpi600\ecrm0900.pk> <C:\Users\Molly\AppData\Local\MiKTeX\2.9\fonts
 \pk\ljfour\jknappen\ec\dpi600\ecti0900.pk> <C:\Users\Molly\AppData\Local\MiKTeX
-\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx2074.pk>
-Output written on presentation455.pdf (9 pages, 96913 bytes).
+\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx2074.pk><C:/Program Files/MiKTeX 2.
+9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/
+type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pub
+lic/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfo
+nts/cm/cmr8.pfb>
+Output written on presentation455.pdf (12 pages, 169861 bytes).
 PDF statistics:
- 430 PDF objects out of 1000 (max. 8388607)
- 26 named destinations out of 1000 (max. 500000)
- 99 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 552 PDF objects out of 1000 (max. 8388607)
+ 32 named destinations out of 1000 (max. 500000)
+ 114 words of extra memory for PDF output out of 10000 (max. 10000000)
 

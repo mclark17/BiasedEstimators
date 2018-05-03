@@ -1,4 +1,5 @@
 setwd("C:/Users/Molly/Documents/GitHub/BiasedEstimators/455Project")
+tourneyZData <- read.csv("03to15DataZeroVal.csv")
 tourneyData = read.csv("03to15Data.csv")
 avgData = read.csv("03to16.csv")
 x=cbind(avgData,tourneyData[,3:length(tourneyData)])
@@ -7,7 +8,7 @@ x
 whatsthis = lm(GPtot~.,data=x[,c(length(x),2:15)])
 cor(x[,2:15])
 avgsZ = x
-#avgsZ[2:15][is.na(avgsZ[2:15])]=0
+avgsZ[2:15][is.na(avgsZ[2:15])]=0
 cor(avgsZ[,2:15])
 #lots of correlation between near consecutive years, makes sense, but useful stuff
 just03 = lm(GP03~avgScore03,avgsZ)
@@ -99,26 +100,30 @@ cook <- cooks.distance(morestuff2Adj2)
 halfnorm(cook)
 #shows 12 and 3 as influential points
 
+head(tourneyZData)
 
+tourneyMod <- lm(GPtot ~., data = tourneyZData)
+sumary(tourneyMod)
 
+head(avgsZ)
 
+everythingMod <- lm(GP05 ~., data=avgsZ[,c(18, 32, 46, 60, 74, 88, 102, 116, 130, 144)])
+sumary(everythingMod)
 
+plot(fitted(everythingMod), everythingMod$residuals)
+abline(h=0)
 
+require(MASS)
+boxcox(everythingMod, plotit=TRUE)
+everythingModAdj <- lm(I((GP05)^(-2/3)) ~., data=avgsZ[,c(18, 32, 46, 60, 74, 88, 102, 116, 130, 144)])
 
+plot(fitted(everythingModAdj), everythingModAdj$residuals)
+abline(h=0)
 
+boxcox(everythingModAdj, plotit = TRUE)
 
-
-
-
-
-
-
-
-
-
-
-
-hi
+sumary(everythingModAdj)
+plot(everythingModAdj)
 
 
 

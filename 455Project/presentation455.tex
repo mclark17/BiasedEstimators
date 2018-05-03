@@ -24,30 +24,64 @@
 \begin{frame}
 \frametitle{{\textbf{\huge Introduction}}}
 \begin{center}
-March Madness is an annual NCAA division 1 basketball tournament. The tournament occurs in the month of March, thereby earning its name. There are 64 teams in the tournament each year, seeded into 4 Regions that each contain 16 teams. We will be taking a look at how far each team makes it into the tournament, based on their regular season data.
+March Madness is an annual NCAA Division 1 basketball tournament. The tournament occurs in the month of March, thereby earning its name. There are 64 teams in the tournament each year, seeded into four regions that each contain 16 teams. We will be taking a look at how far each team makes it into the tournament, based on their regular season data and prior tournament success.
 \end{center}
 \end{frame}
 \section{Data Summary}
 \begin{frame}
 \frametitle{{\textbf{\huge Data Summary}}}
-\begin{itemize}
-	\item Our data is made up of 365 teams, each with a specific numerical code, and their regular season data. We have winning and losing scores from the years 1985 to 2016, but have additional data that includes the team statistics from the years 2003 to 2016.
-\end{itemize}
+\center Our data consists of three main components. We have detailed regular season data from 2003 to 2016 for 365 teams, each with a specific numerical code. We have non-team specific game data from the years 1985 to 2016, comprised of winning and losing team scores, and other statistics. Lastly, we have tournament data  for each playoff team from the years 2003 to 2016.
 \end{frame}
 \section{Pre-Analysis}
 \begin{frame}
-\begin{itemize}
-	\item We broke up and averaged the data for each team for each year. We accumulated this data into two new datasets: one containing the information from 1985 to 2003 and one containing the information from 2003 to 2016.
-\end{itemize}
+\center Our main goal of the pre-anaylsis was to think about what predictors might be important in our future model. The ideal model would predict a team's success in the NCAA tournament based on regular season statistics and prior tournament success. In order to do so, we compared winning and losing team data for relevant statistics: field goals, assists, rebounds, etc. 
+\frametitle{{\textbf{\huge Pre-Analysis}}}
+\end{frame}
+\begin{frame}
+	\begin{center}
+		\includegraphics[scale=0.255]{GameAverages.png}
+		\includegraphics[scale=0.255]{GameAverages2.png}  
+	\end{center}
+\footnotesize \center The data shows much of what would be expected, on average. Winning teams hold higher averages in "positive" stats such as assists, rebounds, and steals. On the other hand, losing teams have higher averages in "negative" stats such as steals, turnovers, and personal fouls.
+\frametitle{{\textbf{\huge Pre-Analysis}}}
+\end{frame}
+\begin{frame}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=.35]{HistOfSuccess.pdf}
+\end{figure}
 \frametitle{{\textbf{\huge Pre-Analysis}}}
 \end{frame}
 \section{Initial Model}
 \begin{frame}
+	\[
+	Y_{daynum} = \beta_0 + \beta_{conf} + \beta_{fgp} +\beta_{tpp} + \beta_{ass} + \beta_{rb} + \beta_{app} + \epsilon
+	\]
+	\footnotesize We initially looked into this model, where the betas represented the following:
+\begin{itemize}
+	\item conf: the conference the team plays in
+	\item fgp: the field goal percentages
+	\item tpp: three point shooting percentage
+	\item ass: assists
+	\item rb: rebounds
+	\item app: prior tournament success
+\end{itemize}
 \frametitle{{\textbf{\huge Initial Model}}}
 \end{frame}
-\section{Diagnostics}
+\section{Process}
 \begin{frame}
-\frametitle{{\textbf{\huge Diagnostics}}}
+In processing our data to develop the model, we went through a number of steps:
+\begin{itemize}
+	\footnotesize
+	\item Separate out the needed data for each team for each year
+	\item Eliminate unusable predictors, and search out missing values
+	\item Calculate the averages of each team's stats for each year
+	\item Compile the averages into a new csv file that we could use moving forward
+\end{itemize}
+\frametitle{{\textbf{\huge Processing}}}
+\end{frame}
+\begin{frame}
+\frametitle{{\textbf{\huge Processing}}}
 \end{frame}
 \section{Final Model}
 \begin{frame}
