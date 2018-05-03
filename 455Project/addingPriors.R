@@ -11,15 +11,13 @@ avgsZ[2:141][is.na(avgsZ[2:141])]=0
 cor(avgsZ[,2:15])
 
 
-addPriorYear <- function(yearoffset,avgsZ1) {
+addPriorYear <- function(yearoffset,avgsZ1,bool=TRUE) {
   #1 means 2013, 2 means 2014, 3 means 2015, and so on
   gp = "GP"
   prefix<-c("avgScore","avgFG","avgTP","avgFT","avgRB","avgASS","avgTO","avgSTL","avgBL","avgPF","GP")
   postfix<-c("03","04","05","06","07","08","09","10","11","12","13","14","15","16")
   ogYear = postfix[yearoffset]
   prevYear = postfix[yearoffset-1]
-  ogGP = paste("GP",ogYear,sep="")
-  prevGP = paste("GP",prevYear,sep="")
   avgsZ2 = avgsZ1
   avgsZ2[,1]=1101:1464
   odf = data.frame(matrix(ncol=(1+ 10 + 1 +1),nrow=(1464-1100)))# 10 for the stats, 2 for the matching years GP and prev year GP 
@@ -28,17 +26,21 @@ addPriorYear <- function(yearoffset,avgsZ1) {
   colnames(odf)[13]=paste(gp,postfix[yearoffset-1],sep="")
   odf[,1]=1101:1464
   counter = 1
-  print(odf)
   #print(avgsZ2) this is fine
   for(i in 2:12)
   {
-    print(yearoffset)
     odf[,i]=avgsZ2[,14*(counter-1)+1+yearoffset]
     counter = counter+1
   }
+  if(bool == FALSE)
+  {
+    odf['Team'] = teamInfo[ match(odf[['Team']],teamInfo[['Team_Id']]),'Team_Name']
+    return(odf[,-length(odf)])
+  }
+  ogGP = paste("GP",ogYear,sep="")
+  prevGP = paste("GP",prevYear,sep="")
   odf[,prevGP]=0
   odf=na.omit(odf)
-  print(odf)
   for(i in 1:length(odf$Team))
   {
     teamname = (odf[i,]$Team)
@@ -57,92 +59,76 @@ addPriorYear <- function(yearoffset,avgsZ1) {
   
 }
 
-#testing
-temp1 = addPriorYear(10,avgsZ)
+library(faraway)
+postfix<-c("03","04","05","06","07","08","09","10","11","12","13","14","15","16")
+bigtime2 = list()
+bigtime = list()
+gp = "GP"
+for(i in 1:13){
+  yr = paste(gp,postfix[i],sep="")
+  bigtime2[[i]]=na.omit(addPriorYear(i,avgsZ,FALSE))[,-1]
+  bigtime2[[i]]<-bigtime2[[i]][complete.cases(bigtime2[[i]]),]
+  write.csv(bigtime2[[i]],paste(yr,'.csv',sep=""))
+}
+gp = "GP"
+for(i in 1:13){
+  yr = paste(gp,postfix[i],sep="")
+  dat=read.csv(paste(yr,'.csv',sep=""))
+  bigtime[[i]]=lm(yr~.,dat[,-1])
+}
+
+avgData03 = read.csv("GP03.csv")
+summary(lm(GP03~.,avgData03[,-1]))
+avgData04 = read.csv("GP04.csv")
+summary(lm(GP04~.,avgData04[,-1]))
+avgData5 = read.csv("GP05.csv")
+summary(lm(GP05~.,avgData5[,-1]))
+avgData6 = read.csv("GP06.csv")
+summary(lm(GP06~.,avgData6[,-1]))
+avgData7 = read.csv("GP07.csv")
+summary(lm(GP07~.,avgData7[,-1]))
+avgData8 = read.csv("GP08.csv")
+summary(lm(GP08~.,avgData8[,-1]))
+avgData9 = read.csv("GP09.csv")
+summary(lm(GP09~.,avgData9[,-1]))
+avgData10 = read.csv("GP10.csv")
+summary(lm(GP10~.,avgData10[,-1]))
+avgData11 = read.csv("GP11.csv")
+summary(lm(GP11~.,avgData11[,-1]))
+avgData12 = read.csv("GP12.csv")
+summary(lm(GP12~.,avgData12[,-1]))
+avgData13 = read.csv("GP13.csv")
+summary(lm(GP13~.,avgData13[,-1]))
+avgData14 = read.csv("GP14.csv")
+summary(lm(GP14~.,avgData14[,-1]))
+avgData15 = read.csv("GP15.csv")
+summary(lm(GP15~.,avgData15[,-1]))
+
+  #testing
+temp1 = addPriorYear(10,avgsZ,TRUE)
 temp2 = lm(GP12~.,temp1[,-1])
 summary(temp2)
 summary(bigtime[[10]])
 
-temp3 = addPriorYear(13,avgsZ)
+temp3 = addPriorYear(13,avgsZ,TRUE) # represents 2015
 temp4 = lm(GP15~.,temp3[,-1])
 summary(temp4)
 summary(bigtime[[13]])
 
-#lots of correlation between near consecutive years, makes sense, but useful stuff
-just03 = lm(GP03~avgScore03,avgsZ)
-summary(just03)
-#pretty bad R squared
+#08 and 09 were very strong years
+prev10 = addPriorYear(8,avgsZ,TRUE)
+fit10 = lm(GP10~.,prev10[,-1])
 
-zforGP03nAVG = x
-zforGP03nAVG[2:15][is.na(zforGP03nAVG[2:15])]=0
-indextozero=which(names(x)=='GP03') # how to find a particular column index
-zforGP03nAVG[indextozero][is.na(zforGP03nAVG[indextozero])]=0
-just03mv0 = lm(GP03~avgScore03,zforGP03nAVG) #missing values are replaced with 0
-summary(just03mv0) # much worse, probably because there are high scoring teams that dont go to the tournament that year
+prev9 = addPriorYear(7,avgsZ,TRUE)
+fit09 = lm(GP09~.,prev9[,-1])
 
-morestuff1 = lm(GP03~avgScore03+avgFG03,avgsZ)
-summary(morestuff1)
+prev8 = addPriorYear(6,avgsZ,TRUE)
+fit08 = lm(GP08~.,prev8[,-1])
 
 
-morestuff2 = lm(GP03~avgScore03+avgFG03+avgTO03,avgsZ)
-summary(morestuff2)
+prev7 = addPriorYear(5,avgsZ,TRUE)
+fit07 = lm(GP07~.,prev7[,-1])
 
-##Want to make the model names first: full model for every year
-M<-"modfull"
-model<-NULL
-for(i in 3:16){
-  model[i]<-paste(M,i,sep = "")
-}
-model<-model[-(1:2)]
-avgsZ[,155-13]##this is the first column of tournament data in "avgsZ"
-## there are 10 total stat predictors for each year, so 
-library(faraway)
-bigtime = list()
-for(i in 1:13){
-  bigtime[[i]]=lm(avgsZ[,141+i]~avgsZ[,1+i]+avgsZ[,15+i]+avgsZ[,29+i]+avgsZ[,43+i]+avgsZ[,57+i]+avgsZ[,71+i]+avgsZ[,85+i]+avgsZ[,99+i]+avgsZ[,113+i]+avgsZ[,127+i],data = avgsZ)
-  sapply(bigtime,class)
-  
-}
+require(MASS)
 
-
-odf[which(odf$Team==avgsZ$Team),13]=avgsZ$GP03
-withPrevYear = list()
-for(i in 1:13){
-  if(i == 1)
-  {
-    withPrevYear[[i]]=lm(avgsZ[,141+i]~avgsZ[,1+i]+avgsZ[,15+i]+avgsZ[,29+i]+avgsZ[,43+i]+avgsZ[,57+i]+avgsZ[,71+i]+avgsZ[,85+i]+avgsZ[,99+i]+avgsZ[,113+i]+avgsZ[,127+i],data = avgsZ)
-    sapply(withPrevYear,class)
-  }
-  else
-  {
-    withPrevYear[[i]]=lm(avgsZ[,141+i]~avgsZ[,141+i-1]+avgsZ[,1+i]+avgsZ[,15+i]+avgsZ[,29+i]+avgsZ[,43+i]+avgsZ[,57+i]+avgsZ[,71+i]+avgsZ[,85+i]+avgsZ[,99+i]+avgsZ[,113+i]+avgsZ[,127+i],data = avgsZ)
-    sapply(withPrevYear,class)
-  }
-}
-
-summary(bigtime[[1]])
-summary(withPrevYear[[1]])
-summary(bigtime[[2]])
-summary(withPrevYear[[2]])
-## ^ this is attempting to put the models into an extractable form
-
-avgsZ[0,2:141] ## this is the column names to be used later to easily interpret the models
-
-###trying to figure out how to incorporate prior years sucess
-
-avgsZ[142:154][is.na(avgsZ[142:154])]=0
-avgsZ[142]
-
-ex<-lm(avgsZ[,145]~avgsZ[,144],data = avgsZ)
-summary(ex)
-for(i in 1:13){
-  if avgsZ[,141+i]=!NA{
-    sumary(lm(avgsZ[,141+i]~avgsZ[,1+i]+avgsZ[,15+i]+avgsZ[,29+i]+avgsZ[,43+i]+avgsZ[,57+i]+avgsZ[,71+i]+avgsZ[,85+i]+avgsZ[,99+i]+avgsZ[,113+i]+avgsZ[,127+i]+,data = avgsZ))
-    }else{
-  sumary(lm(avgsZ[,141+i]~avgsZ[,1+i]+avgsZ[,15+i]+avgsZ[,29+i]+avgsZ[,43+i]+avgsZ[,57+i]+avgsZ[,71+i]+avgsZ[,85+i]+avgsZ[,99+i]+avgsZ[,113+i]+avgsZ[,127+i],data = avgsZ))
-}
-    }
-
-avgsZ[,142]
-
-
+stepwise(fit08,criterion = c("AIC"),direction=c("forward"))
