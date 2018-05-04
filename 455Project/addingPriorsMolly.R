@@ -143,6 +143,7 @@ require(MASS)
 library(faraway)
 
 plot(fitted(fit09), residuals(fit09))
+abline(h=0)
 boxcox(fit09, plotit = TRUE)
 
 fit09Adj <- lm(I(GP09^(-1/2))~.,prev9[,-1])
@@ -185,6 +186,7 @@ summary(predMod15)
 predMod15full <- lm(GP15~., prev15[,-1])
 summary(predMod15full)
 
+
 plot(predMod15full$fitted.values, predMod15full$residuals)
 boxcox(predMod15full, plotit=TRUE)
 
@@ -193,8 +195,23 @@ summary(predMod15fullAdj)
 
 stepwise(predMod15fullAdj, criterion = "AIC", direction = c("forward"))
 
+predMod15 <- lm(GP15~GP14+avgASS15+avgFT15+avgPF15+avgSTL15+avgScore15,prev15[,-1])
+
+predset09 <- data.frame(GP08=6, avgASS09=13.48485, avgFT09=17.33333, avgPF09=16.63636, avgSTL09=6.393939, avgScore09=81.45455)
+predict(fit09Adj2, predset09, interval="predict")
 
 
+predset15 <- data.frame(GP14=6, avgASS15=13.48485, avgFT15=17.33333, avgPF15=16.63636, avgSTL15=6.393939, avgScore15=81.45455)
+predict(predMod15, predset15, interval="predict")
 
-fit09Adj4 <- lm(GP09~GP08+avgASS09+avgFT09+avgPF09+avgFG09+avgTO09,prev9[,-1])
+
+fit09Adj4 <- lm(I(GP09^(-1/2))~GP08+avgASS09+avgFT09+avgPF09+avgFG09+avgTO09,prev9[,-1])
 summary(fit09Adj4)
+
+
+fit09Adj4 <- lm(I(GP09^(-1/2))~GP08+avgASS09+avgFT09+avgPF09+avgFG09+avgTO09,prev9[,-1])
+predsetD <- data.frame(GP08=6, avgASS09=13.48485, avgFT09=17.33333, avgPF09=16.63636, avgSTL09=6.393939, avgFG09=, avgTO09=)
+predict(fit09Adj4, predsetD, interval="predict")
+
+predsetA <- data.frame(GP08=6, avgASS09=13.48485, avgFT09=17.33333, avgPF09=16.63636, avgSTL09=6.393939, avgFG09=, avgTO09=)
+predict(fit09Adj4, predsetA, interval="predict")
