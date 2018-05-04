@@ -118,17 +118,64 @@ summary(bigtime[[13]])
 #08 and 09 were very strong years
 prev10 = addPriorYear(8,avgsZ,TRUE)
 fit10 = lm(GP10~.,prev10[,-1])
+summary(fit10)
 
 prev9 = addPriorYear(7,avgsZ,TRUE)
 fit09 = lm(GP09~.,prev9[,-1])
+summary(fit09)
+#good good fit
 
 prev8 = addPriorYear(6,avgsZ,TRUE)
 fit08 = lm(GP08~.,prev8[,-1])
+summary(fit08)
+#good good fit
 
 
 prev7 = addPriorYear(5,avgsZ,TRUE)
 fit07 = lm(GP07~.,prev7[,-1])
+summary(fit07)
 
 require(MASS)
 
-stepwise(fit08,criterion = c("AIC"),direction=c("forward"))
+
+plot(fitted(fit09), residuals(fit09))
+boxcox(fit09, plotit = TRUE)
+
+fit09Adj <- lm(I(GP09^(-1/2))~.,prev9[,-1])
+summary(fit09Adj)
+
+boxcox(fit09Adj, plotit=TRUE)
+plot(fitted(fit09Adj), residuals(fit09Adj))
+
+qqnorm(fit09Adj$residuals)
+
+lev <- hatvalues(fit09Adj)
+halfnorm(lev)
+#should look at 41 and 52
+
+studentres <- rstudent(fit09Adj)
+range(studentres)
+which.max(abs(studentres))
+#should look at 229 and 41
+
+cook <- cooks.distance(fit09Adj)
+halfnorm(cook)
+#look at 14 and 41
+
+library(Rcmdr)
+
+stepwise(fit09Adj,criterion = c("AIC"),direction=c("forward"))
+
+fit09Adj2 = lm(GP09~GP08+avgASS09+avgFT09+avgPF09+avgSTL09+avgScore09,prev9[,-1])
+summary(fit09Adj2)
+
+
+
+
+
+
+
+
+
+
+
