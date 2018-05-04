@@ -1,0 +1,22 @@
+Call:
+lm(formula = I(GP10^(-1/2)) ~ avgRB10 + avgBL10 + GP09, data = prev10[, 
+    -1])
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.41750 -0.15914  0.05975  0.14955  0.30632 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  1.132271   0.128290   8.826 1.69e-12 ***
+avgRB10     -0.003455   0.002491  -1.387  0.17052    
+avgBL10     -0.031447   0.019632  -1.602  0.11436    
+GP09        -0.047062   0.016988  -2.770  0.00741 ** 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.1912 on 61 degrees of freedom
+Multiple R-squared:  0.1853,	Adjusted R-squared:  0.1452 
+F-statistic: 4.624 on 3 and 61 DF,  p-value: 0.005587
+
+Post AIC, we get higher Adj R^2, main point being Games played from previous years makes a yuge difference
