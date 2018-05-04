@@ -40,11 +40,21 @@ March Madness is an annual NCAA Division 1 basketball tournament. The tournament
 \section{Data Summary}
 \begin{frame}
 \frametitle{{\textbf{\huge Data Summary}}}
-\center Our data consists of three main components. We have detailed regular season data from 2003 to 2016 for 365 teams, each with a specific numerical code. We have non-team specific game data from the years 1985 to 2016, comprised of winning and losing team scores, and other statistics. Lastly, we have tournament data  for each playoff team from the years 2003 to 2016.
+\center
+Our data consists of three main components:\\
+\begin{itemize}
+	\item Detailed regular season data from 2003 to 2016 for 365 teams.
+	\item Non-team specific game data from the years 1985 to 2016.
+	\item Tournament data  for each playoff team from the years 2003 to 2016.
+\end{itemize}
 \end{frame}
 \section{Pre-Analysis}
 \begin{frame}
-\center Our main goal of the pre-anaylsis was to think about what predictors might be important in our future model. The ideal model would predict a team's success in the NCAA tournament based on regular season statistics and prior tournament success. In order to do so, we compared winning and losing team data for relevant statistics: field goals, assists, rebounds, etc. 
+\begin{itemize}
+	\item Wanted to target predictors in future model.
+	\item We want to predict teams success in the NCAA tournament
+	\item Compared winning and losing team data for relevant statistics
+\end{itemize}
 \frametitle{{\textbf{\huge Pre-Analysis}}}
 \end{frame}
 \begin{frame}
@@ -52,7 +62,7 @@ March Madness is an annual NCAA Division 1 basketball tournament. The tournament
 		\includegraphics[scale=0.255]{GameAverages.png}
 		\includegraphics[scale=0.255]{GameAverages2.png}  
 	\end{center}
-\footnotesize \center The data shows much of what would be expected, on average. Winning teams hold higher averages in "positive" stats such as assists, rebounds, and steals. On the other hand, losing teams have higher averages in "negative" stats such as turnovers, and personal fouls.
+\footnotesize \center  Winning teams hold higher averages in "positive" stats such as assists, rebounds, and steals. 
 \frametitle{{\textbf{\huge Pre-Analysis}}}
 \end{frame}
 \begin{frame}
@@ -60,7 +70,7 @@ March Madness is an annual NCAA Division 1 basketball tournament. The tournament
 	\includegraphics[scale=0.255]{SeasonShotPercent.png}
 	\includegraphics[scale=0.255]{TourneyShotPercent.png}  
 \end{center}
-\footnotesize \center We also analyzed the shooting percentages from different the ranges, looking at season data separate from tournament data. As anticipated, the winning teams averaged higher in all categories, but there are a significant number of outliers in the Season data.
+\footnotesize \center As anticipated, the winning teams averaged higher in all categories, but there are a significant number of outliers in the Season data.
 \frametitle{{\textbf{\huge Pre-Analysis}}}
 \end{frame}
 \begin{frame}
