@@ -107,12 +107,61 @@ We continue this analysis of History of Success by looking at teams that are all
 The figure above shows some of the teams with the most appearances in the March Madness tournament. Higher frequency logically relates to a better team, and this data allows us to see which teams are consistently present and performing in the tournament.
 
 \section*{Initial Model}
+	\[
+Y_{daynum} = \beta_0 + \beta_{conf} + \beta_{fgp} +\beta_{tpp} + \beta_{ass} + \beta_{rb} + \beta_{app} + \epsilon
+\]
+Our original model contained all of the predictors that we felt would be the most important moving forward. These predictors and subscripts are outlined below:
+	\begin{itemize}
+	\item The response variable, {\textit{daynum}}, signifies what day of the year the last game is played for each team. This is a good measure of two things: If a team makes the tournament and how far that team advances.
+	\item 	{\textit{conf:}} the conference the team plays in - different conferences have vastly different quality of teams
+	\item 	{\textit{fgp:}} refers to field goal percentage
+	\item 	{\textit{tpp:}} three point shooting percentage
+	\item 	{\textit{ass:}} assists
+	\item 	{\textit{rb:}} rebounds
+	\item 	{\textit{app:}} prior tournament success - indicated by number of previous appearances in the tournament
+	\end{itemize}
+Seed is not included because seeding is almost entirely determined by conference and record. Record is left out because it is in large part determined by a teams statistics, which we have included in the model.
 \section*{Processing}
+In working with our data to develop a model, we realized that there may be a better way to interpret it. We also ran into problems with some predictors and variables because they were quite difficult to quantify or compare.
+
+We found that {\textit{daynum}} may not be the best measure of a team's success in the tournament because the respective games of a tournament are played on slightly different days each year. This means that the team who won the tournament in 2003 could have a higher daynum than the team who won the tournament in 2004, automatically ranking the 2003 team higher, although they played and won the same number of games.
+
+We also found that {\textit{conf}} was difficult to quantify because while some conferences are undoubtedly better than others, it is not up to our judgment as to decide how much better they are and which conferences deserve to be credited as the best.
 \subsection*{Data Plumbing}
 \subsection*{Data Reconstruction}
 \section*{Full Model}
-\section*{Model Analysis}
+	\[
+Y_{GP_{year}} = \beta_0 + \beta_{avgScore} + \beta_{avgASS} +\beta_{avgFT} + \beta_{avgPF} + \beta_{avgTP} + \beta_{avgRB} + \beta_{avgTO}
+\] 
+\[
++ \beta_{avgSTL} +\beta_{avgBL} + \beta_{GP_{year-1}}+ \epsilon
+\]
+We fit a full model with all of the possible predictors that we pulled from the data. The full list of predictors includes:
+	\begin{itemize}
+	\item 	{$GP_{year}$:} number of games the team plays in the tournament in a given year
+	\item 	{\textit{avgScore:}} average score per team per game in regular season
+	\item 	{\textit{avgASS:}} average assists per team per game in regular season
+	\item 	{\textit{avgFT:}} average free throws per team per game in regular season
+	\item 	{\textit{avgPF:}} average personal fouls per team per game in regular season
+	\item 	{\textit{avgTP:}} average three point shots made per team per game in regular season
+	\item 	{\textit{avgRB:}} average total rebounds per team per game in regular season
+	\item 	{\textit{avgTO:}} average turnovers per team per game in regular season
+	\item 	{\textit{avgSTL:}} average steals per team per game in regular season
+	\item 	{\textit{avgBL:}} average blocks per team per game in regular season
+	\item 	{$GP_{year-1}$:} number of games the team plays in the tournament in the prior year
+	\end{itemize}
+We formed this model for each year from 2003 to 2015 because those are the years that we have the most data for, and we seek out the model with the highest $R^{2}$ value because it accounts for the most variation in the response. The coefficients and summary of some of the models are shown below:
+\begin{verbatim}
+Insert clippings from R code
+\end{verbatim}
+\section*{Full Model Analysis}
 \section*{Final Model}
+	\[
+Y_{GP_{year}}^{-0.5} = \beta_0 + \beta_{avgASS} +\beta_{avgFT} + \beta_{avgPF} + \beta_{avgFG} + \beta_{avgTO} + \beta_{GP_{year-1}}+ \epsilon 
+\]
+\section*{Final Model Analysis}
+\section*{Predictions}
+\section*{Further Research}
 \section*{Appendix}
 
 \end{document}
