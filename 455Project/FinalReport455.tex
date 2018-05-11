@@ -150,10 +150,107 @@ We fit a full model with all of the possible predictors that we pulled from the 
 	\item 	{\textit{avgBL:}} average blocks per team per game in regular season
 	\item 	{$GP_{year-1}$:} number of games the team plays in the tournament in the prior year
 	\end{itemize}
-We formed this model for each year from 2003 to 2015 because those are the years that we have the most data for, and we seek out the model with the highest $R^{2}$ value because it accounts for the most variation in the response. The coefficients and summary of some of the models are shown below:
+We formed this model for each year from 2004 to 2015 because those are the years that we have the most data for, and we seek out the model with the highest $R^{2}$ value because it accounts for the most variation in the response. The coefficients and summary of some of the models are shown below:
 \begin{verbatim}
-Insert clippings from R code
+> prev4 = addPriorYear(2,avgsZ,TRUE)
+> fit04 = lm(GP04~.,prev4[,-1])
+> summary(fit04)
+
+Call:
+lm(formula = GP04 ~ ., data = prev4[, -1])
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.7484 -0.6289 -0.1841  0.5283  3.5693 
+
+Coefficients: (1 not defined because of singularities)
+Estimate Std. Error t value Pr(>|t|)  
+(Intercept) -2.476693   2.445436  -1.013   0.3157  
+avgScore04  -0.003557   0.084844  -0.042   0.9667  
+avgFG04      0.208241   0.238282   0.874   0.3860  
+avgTP04      0.111249   0.147521   0.754   0.4541  
+avgFT04            NA         NA      NA       NA  
+avgRB04      0.011671   0.018473   0.632   0.5302  
+avgASS04    -0.128551   0.119710  -1.074   0.2877  
+avgTO04     -0.239030   0.112035  -2.134   0.0374 *
+avgSTL04    -0.124997   0.123520  -1.012   0.3161  
+avgBL04      0.328675   0.133100   2.469   0.0167 *
+avgPF04      0.162716   0.105641   1.540   0.1293  
+GP03         0.076130   0.112047   0.679   0.4998  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.125 on 54 degrees of freedom
+Multiple R-squared:  0.3546,	Adjusted R-squared:  0.2351 
+F-statistic: 2.967 on 10 and 54 DF,  p-value: 0.004799
+
+>
+> prev9 = addPriorYear(7,avgsZ,TRUE)
+> fit09 = lm(GP09~.,prev9[,-1])
+> summary(fit09)
+
+Call:
+lm(formula = GP09 ~ ., data = prev9[, -1])
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.6153 -0.6350 -0.1082  0.5441  2.6755 
+
+Coefficients: (1 not defined because of singularities)
+Estimate Std. Error t value Pr(>|t|)    
+(Intercept) -0.17350    2.63262  -0.066 0.947699    
+avgScore09   0.22102    0.06561   3.369 0.001400 ** 
+avgFG09     -0.59909    0.19117  -3.134 0.002789 ** 
+avgTP09     -0.39458    0.12390  -3.185 0.002407 ** 
+avgFT09           NA         NA      NA       NA    
+avgRB09      0.01778    0.01539   1.155 0.253025    
+avgASS09     0.34903    0.10525   3.316 0.001636 ** 
+avgTO09     -0.03090    0.10399  -0.297 0.767497    
+avgSTL09     0.19539    0.12018   1.626 0.109797    
+avgBL09     -0.08933    0.11806  -0.757 0.452553    
+avgPF09     -0.15114    0.10048  -1.504 0.138351    
+GP08         0.28387    0.07955   3.568 0.000763 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.9419 on 54 degrees of freedom
+Multiple R-squared:  0.5478,	Adjusted R-squared:  0.4641 
+F-statistic: 6.542 on 10 and 54 DF,  p-value: 1.58e-06
+
+>
+> prev15 = addPriorYear(13,avgsZ,TRUE)
+> fit15 = lm(GP15~.,prev15[,-1])
+> summary(fit15)
+
+Call:
+lm(formula = GP15 ~ ., data = prev15[, -1])
+
+Residuals:
+    Min       1Q   Median       3Q      Max 
+-2.13475 -0.74144 -0.07461  0.59031  2.93999 
+
+Coefficients: (1 not defined because of singularities)
+Estimate Std. Error t value Pr(>|t|)    
+(Intercept) -1.137942   2.505740  -0.454  0.65146    
+avgScore15   0.009128   0.087329   0.105  0.91712    
+avgFG15      0.222098   0.204176   1.088  0.28127    
+avgTP15     -0.161144   0.132683  -1.215  0.22956    
+avgFT15            NA         NA      NA       NA    
+avgRB15      0.018762   0.013055   1.437  0.15615    
+avgASS15    -0.062710   0.100166  -0.626  0.53378    
+avgTO15     -0.156939   0.122918  -1.277  0.20686    
+avgSTL15     0.055784   0.118423   0.471  0.63940    
+avgBL15     -0.035234   0.118800  -0.297  0.76787    
+avgPF15     -0.042033   0.082793  -0.508  0.61363    
+GP14         0.372234   0.099741   3.732  0.00044 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.011 on 57 degrees of freedom
+Multiple R-squared:  0.4606,	Adjusted R-squared:  0.366 
+F-statistic: 4.868 on 10 and 57 DF,  p-value: 4.65e-05
 \end{verbatim}
+The above code output shows the coefficients for three models, from years 2004, 2009, and 2015. Clearly, the $R^{2}$ values vary from model to model, but we found that the model from 2009 had the highest $R^{2}$ value and the most significant figures when compared to the other full models.
 \section*{Full Model Analysis}
 \section*{Final Model}
 	\[
@@ -163,5 +260,303 @@ Y_{GP_{year}}^{-0.5} = \beta_0 + \beta_{avgASS} +\beta_{avgFT} + \beta_{avgPF} +
 \section*{Predictions}
 \section*{Further Research}
 \section*{Appendix}
+{\textbf{Summary output for full model:}}
+\begin{verbatim}
+> prev14 = addPriorYear(12,avgsZ,TRUE)
+> fit14 = lm(GP14~.,prev14[,-1])
+> summary(fit14)
+
+Call:
+lm(formula = GP14 ~ ., data = prev14[, -1])
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.6535 -0.6375 -0.1490  0.3945  3.7843 
+
+Coefficients: (1 not defined because of singularities)
+Estimate Std. Error t value Pr(>|t|)  
+(Intercept)  5.301180   2.745766   1.931   0.0585 .
+avgScore14  -0.104674   0.083860  -1.248   0.2171  
+avgFG14      0.309636   0.239501   1.293   0.2013  
+avgTP14      0.156841   0.153644   1.021   0.3117  
+avgFT14            NA         NA      NA       NA  
+avgRB14      0.009232   0.018780   0.492   0.6249  
+avgASS14    -0.053165   0.107422  -0.495   0.6226  
+avgTO14     -0.209756   0.127291  -1.648   0.1049  
+avgSTL14    -0.145048   0.133040  -1.090   0.2802  
+avgBL14      0.275043   0.145680   1.888   0.0641 .
+avgPF14     -0.106358   0.110073  -0.966   0.3380  
+GP13         0.082681   0.126693   0.653   0.5166  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.208 on 57 degrees of freedom
+Multiple R-squared:  0.2437,	Adjusted R-squared:  0.1111 
+F-statistic: 1.837 on 10 and 57 DF,  p-value: 0.07443
+
+> 
+> prev13 = addPriorYear(11,avgsZ,TRUE)
+> fit13 = lm(GP13~.,prev13[,-1])
+> summary(fit13)
+
+Call:
+lm(formula = GP13 ~ ., data = prev13[, -1])
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.8786 -0.6606 -0.1628  0.5599  3.1439 
+
+Coefficients: (1 not defined because of singularities)
+Estimate Std. Error t value Pr(>|t|)  
+(Intercept)  3.30169    3.04878   1.083   0.2834  
+avgScore13  -0.06515    0.09446  -0.690   0.4932  
+avgFG13      0.20597    0.23302   0.884   0.3805  
+avgTP13      0.08966    0.15024   0.597   0.5530  
+avgFT13           NA         NA      NA       NA  
+avgRB13      0.01222    0.02041   0.599   0.5516  
+avgASS13    -0.14487    0.11411  -1.270   0.2094  
+avgTO13     -0.04789    0.12670  -0.378   0.7068  
+avgSTL13     0.29211    0.13630   2.143   0.0364 *
+avgBL13      0.01784    0.14977   0.119   0.9056  
+avgPF13     -0.16485    0.12234  -1.347   0.1832  
+GP12         0.25061    0.11103   2.257   0.0279 *
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.154 on 57 degrees of freedom
+Multiple R-squared:  0.3101,	Adjusted R-squared:  0.1891 
+F-statistic: 2.562 on 10 and 57 DF,  p-value: 0.01243
+
+> 
+> prev12 = addPriorYear(10,avgsZ,TRUE)
+> fit12 = lm(GP12~.,prev12[,-1])
+> summary(fit12)
+
+Call:
+lm(formula = GP12 ~ ., data = prev12[, -1])
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.3717 -0.6724 -0.1912  0.4705  2.8825 
+
+Coefficients: (1 not defined because of singularities)
+Estimate Std. Error t value Pr(>|t|)   
+(Intercept)  3.58332    2.81280   1.274  0.20786   
+avgScore12  -0.17995    0.08624  -2.087  0.04141 * 
+avgFG12      0.36211    0.25401   1.426  0.15945   
+avgTP12      0.01410    0.13270   0.106  0.91576   
+avgFT12           NA         NA      NA       NA   
+avgRB12      0.06054    0.02019   2.999  0.00402 **
+avgASS12    -0.06248    0.13882  -0.450  0.65437   
+avgTO12     -0.01225    0.11686  -0.105  0.91686   
+avgSTL12     0.10954    0.12354   0.887  0.37899   
+avgBL12      0.07202    0.15598   0.462  0.64602   
+avgPF12     -0.04097    0.10304  -0.398  0.69239   
+GP11         0.22083    0.10731   2.058  0.04419 * 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.075 on 57 degrees of freedom
+Multiple R-squared:  0.3898,	Adjusted R-squared:  0.2827 
+F-statistic: 3.641 on 10 and 57 DF,  p-value: 0.0008516
+
+> 
+> prev11 = addPriorYear(9,avgsZ,TRUE)
+> fit11 = lm(GP11~.,prev11[,-1])
+> summary(fit11)
+
+Call:
+lm(formula = GP11 ~ ., data = prev11[, -1])
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.5599 -0.7117 -0.3055  0.4825  4.0113 
+
+Coefficients: (1 not defined because of singularities)
+Estimate Std. Error t value Pr(>|t|)  
+(Intercept)  2.261465   2.888834   0.783   0.4370  
+avgScore11  -0.007744   0.092958  -0.083   0.9339  
+avgFG11      0.256092   0.263395   0.972   0.3350  
+avgTP11      0.162204   0.166759   0.973   0.3348  
+avgFT11            NA         NA      NA       NA  
+avgRB11      0.013038   0.018242   0.715   0.4777  
+avgASS11    -0.293256   0.135765  -2.160   0.0350 *
+avgTO11     -0.046868   0.145977  -0.321   0.7493  
+avgSTL11     0.108027   0.140027   0.771   0.4436  
+avgBL11      0.014608   0.162108   0.090   0.9285  
+avgPF11     -0.223840   0.124075  -1.804   0.0765 .
+GP10         0.151927   0.102938   1.476   0.1455  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.201 on 57 degrees of freedom
+Multiple R-squared:  0.2788,	Adjusted R-squared:  0.1523 
+F-statistic: 2.204 on 10 and 57 DF,  p-value: 0.03038
+
+> 
+> prev10 = addPriorYear(8,avgsZ,TRUE)
+> fit10 = lm(GP10~.,prev10[,-1])
+> summary(fit10)
+
+Call:
+lm(formula = GP10 ~ ., data = prev10[, -1])
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.6940 -0.7676 -0.3351  0.5501  3.7452 
+
+Coefficients: (1 not defined because of singularities)
+Estimate Std. Error t value Pr(>|t|)  
+(Intercept)  1.40279    3.22112   0.435   0.6649  
+avgScore10   0.07318    0.09513   0.769   0.4451  
+avgFG10     -0.26524    0.25676  -1.033   0.3062  
+avgTP10      0.01756    0.19928   0.088   0.9301  
+avgFT10           NA         NA      NA       NA  
+avgRB10      0.01787    0.01944   0.919   0.3620  
+avgASS10     0.05366    0.12805   0.419   0.6768  
+avgTO10     -0.07381    0.14292  -0.516   0.6077  
+avgSTL10    -0.10435    0.13868  -0.752   0.4551  
+avgBL10      0.28555    0.17057   1.674   0.0999 .
+avgPF10      0.03564    0.11033   0.323   0.7479  
+GP09         0.26721    0.11937   2.239   0.0293 *
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.257 on 54 degrees of freedom
+Multiple R-squared:  0.1949,	Adjusted R-squared:  0.04579 
+F-statistic: 1.307 on 10 and 54 DF,  p-value: 0.2504
+
+> 
+> prev8 = addPriorYear(6,avgsZ,TRUE)
+> fit08 = lm(GP08~.,prev8[,-1])
+> summary(fit08)
+
+Call:
+lm(formula = GP08 ~ ., data = prev8[, -1])
+
+Residuals:
+    Min       1Q   Median       3Q      Max 
+-1.42411 -0.62107 -0.08825  0.63471  1.95409 
+
+Coefficients: (1 not defined because of singularities)
+Estimate Std. Error t value Pr(>|t|)    
+(Intercept) -1.38585    2.00584  -0.691  0.49258    
+avgScore08  -0.02949    0.07537  -0.391  0.69716    
+avgFG08      0.16887    0.18739   0.901  0.37152    
+avgTP08     -0.24737    0.12896  -1.918  0.06039 .  
+avgFT08           NA         NA      NA       NA    
+avgRB08      0.03838    0.01563   2.456  0.01730 *  
+avgASS08     0.03256    0.09736   0.334  0.73936    
+avgTO08     -0.23483    0.09382  -2.503  0.01537 *  
+avgSTL08     0.09159    0.10375   0.883  0.38123    
+avgBL08      0.06124    0.10269   0.596  0.55342    
+avgPF08      0.14675    0.09236   1.589  0.11792    
+GP07         0.33183    0.08974   3.698  0.00051 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.9184 on 54 degrees of freedom
+Multiple R-squared:  0.5701,	Adjusted R-squared:  0.4905 
+F-statistic:  7.16 on 10 and 54 DF,  p-value: 4.689e-07
+
+> 
+> prev7 = addPriorYear(5,avgsZ,TRUE)
+> fit07 = lm(GP07~.,prev7[,-1])
+> summary(fit07)
+
+Call:
+lm(formula = GP07 ~ ., data = prev7[, -1])
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.7748 -0.7216 -0.2807  0.6634  2.4802 
+
+Coefficients: (1 not defined because of singularities)
+Estimate Std. Error t value Pr(>|t|)   
+(Intercept)  2.6029631  2.4564810   1.060  0.29403   
+avgScore07  -0.0651920  0.0718252  -0.908  0.36810   
+avgFG07      0.2446843  0.1938464   1.262  0.21228   
+avgTP07      0.1423438  0.1418684   1.003  0.32017   
+avgFT07             NA         NA      NA       NA   
+avgRB07     -0.0005477  0.0172239  -0.032  0.97475   
+avgASS07     0.0260457  0.1167849   0.223  0.82436   
+avgTO07     -0.2402723  0.0966838  -2.485  0.01608 * 
+avgSTL07    -0.0466975  0.1167059  -0.400  0.69064   
+avgBL07      0.1657333  0.1212501   1.367  0.17733   
+avgPF07     -0.0462716  0.0882245  -0.524  0.60209   
+GP06         0.3212087  0.1051509   3.055  0.00349 **
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.056 on 54 degrees of freedom
+Multiple R-squared:  0.4317,	Adjusted R-squared:  0.3265 
+F-statistic: 4.102 on 10 and 54 DF,  p-value: 0.0003138
+
+> 
+> prev6 = addPriorYear(4,avgsZ,TRUE)
+> fit06 = lm(GP06~.,prev6[,-1])
+> summary(fit06)
+
+Call:
+lm(formula = GP06 ~ ., data = prev6[, -1])
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.6347 -0.8841 -0.2856  0.5480  4.1550 
+
+Coefficients: (1 not defined because of singularities)
+Estimate Std. Error t value Pr(>|t|)  
+(Intercept)  0.205358   2.752568   0.075   0.9408  
+avgScore06   0.076930   0.095801   0.803   0.4255  
+avgFG06      0.017233   0.261605   0.066   0.9477  
+avgTP06     -0.005185   0.164894  -0.031   0.9750  
+avgFT06            NA         NA      NA       NA  
+avgRB06     -0.014477   0.017667  -0.819   0.4161  
+avgASS06    -0.055950   0.131938  -0.424   0.6732  
+avgTO06      0.030397   0.141820   0.214   0.8311  
+avgSTL06     0.046671   0.123428   0.378   0.7068  
+avgBL06      0.133624   0.139198   0.960   0.3414  
+avgPF06     -0.232631   0.114706  -2.028   0.0475 *
+GP05         0.017416   0.106412   0.164   0.8706  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.235 on 54 degrees of freedom
+Multiple R-squared:  0.2222,	Adjusted R-squared:  0.07813 
+F-statistic: 1.542 on 10 and 54 DF,  p-value: 0.15
+
+> 
+> prev5 = addPriorYear(3,avgsZ,TRUE)
+> fit05 = lm(GP05~.,prev5[,-1])
+> summary(fit05)
+
+Call:
+lm(formula = GP05 ~ ., data = prev5[, -1])
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.6795 -0.7748 -0.1379  0.6690  2.4834 
+
+Coefficients: (1 not defined because of singularities)
+Estimate Std. Error t value Pr(>|t|)  
+(Intercept) -1.66958    2.56583  -0.651   0.5180  
+avgScore05  -0.05241    0.08522  -0.615   0.5412  
+avgFG05      0.06125    0.23014   0.266   0.7911  
+avgTP05      0.29683    0.14053   2.112   0.0393 *
+avgFT05           NA         NA      NA       NA  
+avgRB05      0.02712    0.01794   1.512   0.1364  
+avgASS05     0.23750    0.12278   1.934   0.0583 .
+avgTO05     -0.01358    0.11565  -0.117   0.9070  
+avgSTL05     0.24432    0.10904   2.241   0.0292 *
+avgBL05     -0.14186    0.12764  -1.111   0.2713  
+avgPF05     -0.12144    0.10890  -1.115   0.2697  
+GP04         0.17571    0.10590   1.659   0.1029  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.09 on 54 degrees of freedom
+Multiple R-squared:  0.3948,	Adjusted R-squared:  0.2827 
+F-statistic: 3.523 on 10 and 54 DF,  p-value: 0.001242
+\end{verbatim}
 
 \end{document}

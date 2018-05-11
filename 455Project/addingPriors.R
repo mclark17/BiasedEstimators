@@ -120,20 +120,70 @@ prev10 = addPriorYear(8,avgsZ,TRUE)
 fit10 = lm(GP10~.,prev10[,-1])
 summary(fit10)
 
-prev9 = addPriorYear(7,avgsZ,TRUE)
+prev9 = addPriorYear(15,avgsZ,TRUE)
 fit09 = lm(GP09~.,prev9[,-1])
 summary(fit09)
 #good good fit
 
-prev8 = addPriorYear(6,avgsZ,TRUE)
+prev8 = addPriorYear(14,avgsZ,TRUE)
 fit08 = lm(GP08~.,prev8[,-1])
 summary(fit08)
 #good good fit
 
 
+
+
+
+
+prev15 = addPriorYear(13,avgsZ,TRUE)
+fit15 = lm(GP15~.,prev15[,-1])
+summary(fit15)
+
+prev14 = addPriorYear(12,avgsZ,TRUE)
+fit14 = lm(GP14~.,prev14[,-1])
+summary(fit14)
+
+prev13 = addPriorYear(11,avgsZ,TRUE)
+fit13 = lm(GP13~.,prev13[,-1])
+summary(fit13)
+
+prev12 = addPriorYear(10,avgsZ,TRUE)
+fit12 = lm(GP12~.,prev12[,-1])
+summary(fit12)
+
+prev11 = addPriorYear(9,avgsZ,TRUE)
+fit11 = lm(GP11~.,prev11[,-1])
+summary(fit11)
+
+prev10 = addPriorYear(8,avgsZ,TRUE)
+fit10 = lm(GP10~.,prev10[,-1])
+summary(fit10)
+
+prev9 = addPriorYear(7,avgsZ,TRUE)
+fit09 = lm(GP09~.,prev9[,-1])
+summary(fit09)
+
+prev8 = addPriorYear(6,avgsZ,TRUE)
+fit08 = lm(GP08~.,prev8[,-1])
+summary(fit08)
+
 prev7 = addPriorYear(5,avgsZ,TRUE)
 fit07 = lm(GP07~.,prev7[,-1])
 summary(fit07)
+
+prev6 = addPriorYear(4,avgsZ,TRUE)
+fit06 = lm(GP06~.,prev6[,-1])
+summary(fit06)
+
+prev5 = addPriorYear(3,avgsZ,TRUE)
+fit05 = lm(GP05~.,prev5[,-1])
+summary(fit05)
+
+prev4 = addPriorYear(2,avgsZ,TRUE)
+fit04 = lm(GP04~.,prev4[,-1])
+summary(fit04)
+
+
 
 require(MASS)
 
