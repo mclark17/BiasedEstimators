@@ -151,6 +151,7 @@ We fit a full model with all of the possible predictors that we pulled from the 
 	\item 	{$GP_{year-1}$:} number of games the team plays in the tournament in the prior year
 	\end{itemize}
 We formed this model for each year from 2004 to 2015 because those are the years that we have the most data for, and we seek out the model with the highest $R^{2}$ value because it accounts for the most variation in the response. The coefficients and summary of some of the models are shown below:
+\footnotesize
 \begin{verbatim}
 > prev4 = addPriorYear(2,avgsZ,TRUE)
 > fit04 = lm(GP04~.,prev4[,-1])
@@ -250,8 +251,85 @@ Residual standard error: 1.011 on 57 degrees of freedom
 Multiple R-squared:  0.4606,	Adjusted R-squared:  0.366 
 F-statistic: 4.868 on 10 and 57 DF,  p-value: 4.65e-05
 \end{verbatim}
+\normalsize
 The above code output shows the coefficients for three models, from years 2004, 2009, and 2015. Clearly, the $R^{2}$ values vary from model to model, but we found that the model from 2009 had the highest $R^{2}$ value and the most significant figures when compared to the other full models.
 \section*{Full Model Analysis}
+We were clearly working with too many predictors in the full model, so we ran diagnostic tests on the full 2009 model and then used the stepwise function, both forward and backward, to reduce the number of predictors. We decided to start by working with the 2009 model because it had a high $R^{2}$ value and many significant predictors.
+\footnotesize
+\begin{verbatim}
+plot(fitted(fit09), residuals(fit09))
+abline(h=0)
+\end{verbatim}
+\normalsize
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=.6]{2009resid.png}
+\end{figure}
+Clearly, there is a distinct fan shape to our residual plot, so we ran a boxcox function to see what type of transformation we should perform on the data.
+\footnotesize
+\begin{verbatim}
+boxcox(fit09, plotit = TRUE)
+\end{verbatim}
+\normalsize
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=.6]{2009box.png}
+\end{figure}
+The boxcox graph shows that we should raise the response to the -$\frac{1}{2}$, so we adjust the model and replot the residuals.
+\footnotesize
+\begin{verbatim}
+fit09Adj <- lm(I(GP09^(-1/2))~.,prev9[,-1])
+plot(fitted(fit09Adj), residuals(fit09Adj))
+abline(h=0)
+summary(fit09Adj)
+
+Output:
+Call:
+lm(formula = I(GP09^(-1/2)) ~ ., data = prev9[, -1])
+
+Residuals:
+Min        1Q    Median        3Q       Max 
+-0.295461 -0.131892  0.006337  0.113975  0.282223 
+
+Coefficients: (1 not defined because of singularities)
+Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  0.623708   0.440643   1.415 0.162678    
+avgScore09  -0.033851   0.010982  -3.082 0.003231 ** 
+avgFG09      0.091291   0.031998   2.853 0.006127 ** 
+avgTP09      0.066538   0.020738   3.208 0.002246 ** 
+avgFT09            NA         NA      NA       NA    
+avgRB09     -0.001131   0.002575  -0.439 0.662340    
+avgASS09    -0.038591   0.017616  -2.191 0.032810 *  
+avgTO09      0.016290   0.017406   0.936 0.353500    
+avgSTL09    -0.046625   0.020115  -2.318 0.024271 *  
+avgBL09      0.020326   0.019761   1.029 0.308254    
+avgPF09      0.031443   0.016818   1.870 0.066959 .  
+GP08        -0.051046   0.013315  -3.834 0.000332 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.1576 on 54 degrees of freedom
+Multiple R-squared:  0.5097,	Adjusted R-squared:  0.4189 
+F-statistic: 5.614 on 10 and 54 DF,  p-value: 1.074e-05
+\end{verbatim}
+\normalsize
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=.6]{2009Aresid.png}
+\end{figure}
+The residual plot is not perfect, but they are more evenly spaced from 0, so we move forward with the adjusted model.
+
+We continue by testing the normality of the residuals.
+\footnotesize
+\begin{verbatim}
+qqnorm(fit09Adj$residuals)
+\end{verbatim}
+\normalsize
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=.6]{2009Anorm.png}
+\end{figure}
+The residuals seem to follow a fairly Normal pattern, so we continue to move forward.
 \section*{Final Model}
 	\[
 Y_{GP_{year}}^{-0.5} = \beta_0 + \beta_{avgASS} +\beta_{avgFT} + \beta_{avgPF} + \beta_{avgFG} + \beta_{avgTO} + \beta_{GP_{year-1}}+ \epsilon 
@@ -261,6 +339,7 @@ Y_{GP_{year}}^{-0.5} = \beta_0 + \beta_{avgASS} +\beta_{avgFT} + \beta_{avgPF} +
 \section*{Further Research}
 \section*{Appendix}
 {\textbf{Summary output for full model:}}
+\footnotesize
 \begin{verbatim}
 > prev14 = addPriorYear(12,avgsZ,TRUE)
 > fit14 = lm(GP14~.,prev14[,-1])

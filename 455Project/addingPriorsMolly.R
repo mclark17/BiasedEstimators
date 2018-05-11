@@ -122,7 +122,7 @@ summary(fit10)
 
 prev9 = addPriorYear(7,avgsZ,TRUE)
 fit09 = lm(GP09~.,prev9[,-1])
-sumary(fit09)
+summary(fit09)
 #good good fit
 
 prev8 = addPriorYear(6,avgsZ,TRUE)
@@ -147,10 +147,11 @@ abline(h=0)
 boxcox(fit09, plotit = TRUE)
 
 fit09Adj <- lm(I(GP09^(-1/2))~.,prev9[,-1])
-sumary(fit09Adj)
-
-boxcox(fit09Adj, plotit=TRUE)
 plot(fitted(fit09Adj), residuals(fit09Adj))
+abline(h=0)
+summary(fit09Adj)
+
+
 
 qqnorm(fit09Adj$residuals)
 
