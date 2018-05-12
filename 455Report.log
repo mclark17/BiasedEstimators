@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2018.1.21)  3 MAY 2018 16:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2018.1.21)  7 MAY 2018 16:38
 entering extended mode
 **./455Report.tex
 (455Report.tex
@@ -283,7 +283,20 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \float@box=\box28
 \@float@everytoks=\toks17
 \@floatcapt=\box29
-) (455Report.aux)
+) (455Report.aux
+
+LaTeX Warning: Label `rVals' multiply defined.
+
+
+LaTeX Warning: Label `rVals' multiply defined.
+
+
+LaTeX Warning: Label `rVals' multiply defined.
+
+
+LaTeX Warning: Label `rVals' multiply defined.
+
+)
 \openout1 = `455Report.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 22.
@@ -301,8 +314,7 @@ LaTeX Font Info:    ... okay on input line 22.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 22.
 LaTeX Font Info:    ... okay on input line 22.
 LaTeX Font Info:    Try loading font information for OT1+ptm on input line 22.
-
-("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\ot1ptm.fd"
+ ("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\ot1ptm.fd"
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
 *geometry* driver: auto-detecting
@@ -630,14 +642,14 @@ Package rerunfilecheck Info: File `455Report.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+LaTeX Warning: There were multiply-defined labels.
 
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 169.
  ) 
 Here is how much of TeX's memory you used:
  8723 strings out of 493312
  144241 string characters out of 3138899
- 322391 words of memory out of 3000000
+ 322572 words of memory out of 3000000
  12149 multiletter control sequences out of 15000+200000
  18644 words of font info for 42 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191

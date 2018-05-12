@@ -1,0 +1,15 @@
+\frametitle{{\textbf{\huge Predictions}}}
+\begin{itemize}
+	\item We attempted some predictions on the 2016 NCAA March Madness tournament
+\end{itemize}
+\begin{verbatim}
+Duke:
+> predict(fit09Adj2, predset09, interval="predict")
+fit      lwr      upr
+1 3.145849 1.042621 5.249077
+
+Albany:
+> predict(fit09Adj2, predset, interval="predict")
+fit       lwr      upr
+1 2.189929 0.2506521 4.129206
+\end{verbatim}
