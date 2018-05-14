@@ -84,6 +84,16 @@ We then looked at winning and losing teams' average shooting percentages for the
 	\includegraphics[scale=.5]{SeasonShotPercent.png}
 \end{figure}
 This figure visualizes the differences that exist, on average, in winning and losing teams' shot percentages. There are a large number of outliers in this plot, which should be noted for future analysis. It is also hard to tell which shots look to be more influential in the winning of a game because the data is so wide-spread.
+\subsection*{Checking Parameters for Normality}
+In order to test potential parameters for normality, we look at the QQ-plots. For field goal percentage, three point percentage, rebounds per game, and assists per game. Due to the large sample size, over 140,000, we do not anticiapte having issues due to the Central Limit Theorem.  
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=.6]{FGnorm.pdf}
+	\includegraphics[scale=.6]{3pnorm.pdf}
+	\includegraphics[scale=.6]{rbnorm.pdf}
+	\includegraphics[scale=.6]{assnorm.pdf}
+\end{figure}
+The only parameter of concern here is the tails of the three point percentage. The minimum and maximum values of this value are 0 and 1, respectively. The issue here lies in the fact that there are several data points with these minimum and maximum values, but there is a gap of values just above the minimum and just below the maximum. For example, for a team to shoot 1 percent on three pointers, the team would have to only hit 1 and attempt 100. This is not plausible. However, a team can only attempt 5 three points and miss all of them, giving them a three point percentage of 0. The same analysis can be made for the maximum value. 
 \subsection*{Tournament Data}
 Much the same as when we worked with the regular season data, we analyzed the tournament data at first on a more basic level of winning teams versus losing teams. Much of the data that we had for tournaments was centered on the teams' abilities to score. We analyzed their shooting percentages during the tournaments and compared average winning teams to average losing teams.
 \begin{figure}[H]
@@ -335,8 +345,11 @@ The residuals seem to follow a fairly Normal pattern, so we continue to move for
 Y_{GP_{year}}^{-0.5} = \beta_0 + \beta_{avgASS} +\beta_{avgFT} + \beta_{avgPF} + \beta_{avgFG} + \beta_{avgTO} + \beta_{GP_{year-1}}+ \epsilon 
 \]
 \section*{Final Model Analysis}
+Each predictor in the final model carries significant meaning with valuable interpretation. Average assists, free throws and field goals measure overall offensive power, while turnovers measures how careful the offense is. Assist to turnover ratio was found to be ineffective as this data variable was not distinguishable enough from team to team. Generally, the more assists a team has the more ball movement they have, the more prone they are to turning the ball over. Amongst march madness bracket teams, the individual number of assists and turnovers proved to be more of a relevant statistic than assist to turnover ratio. Furthermore, the assist to turnover ratio is more precise and valuable in measuring a particular players effectiveness, for example a team's point guard. The remaining predictors are personal fouls and prior year success. Personal fouls is a measure of a team's defensive ability. This is not the best statistic for measuring a teams defensive capability, but it is for this data set. Prior year tournament success is the last predictor and is the most straight forward. There is tremendous correlation across time for teams making the tournament one year if they made it the previous year.   
 \section*{Predictions}
 \section*{Further Research}
+Further research that would likely have more prediction power would incorporate advanced sports statistics. The most important improvement in the model could be defensive metrics. As far as stat sheet statistics go for defense, the only measureable statistics are bocks, steals, and personal fouls. Blocks and steals do not occur many times in a game, the  player that leads the league in either category typically does not average more than four per game. In the past ten years, a great deal of advancements in statistical analysis have paved the way for new defensive metrics for a basketball team. A common statistic is points allowed per 100 possesions. The team with the fewest points allowed per 100 possesions would be classified as the team with the lowest scoting defense. Unfortuantely, in our data set, we could not formulate any advanced defensive statitics.\\
+Another predictor we would like to have in the future is a measure of conference. This was expressed in our initial, hypothetical model but not in our final model. In NCAA basketball, specific conferences have more high quality teams. These teams are more likely to make the tournament even if their record is inferior to other teams in other conferences. There are a total of 32 conferences for the 2017-2018 season, but only 7 of them make up the majority of NCAA tournament teams: Big 12, ACC, Big East, Big Ten, SEC, The American, and the Pac-12. Every  year multiple teams from these conferences make the tournament. This cannot be said for all conferences. For example, Binghamton's basketball team lies in the American East conference. Only the winner of this conference typically makes the tournament. Future models should incoporate some kind of dummy variable to account for this variation. A predictor variable "conference" could be added. Teams in these conferences would be assigned a value of 1 while other teams would be assinged a value of zero. This would help the prediction of the model, due to the fact that two teams in different conferences can have very simialr statistics on paper, but one will make the tournament and one will not. A good example of this was this year's Vermont team in the American East conference. Vermont had a 27-8 overall record, but failed to make the NCAA tournament due to their loss in the American East tournament. Teams with this record in the 7 conferecnes previously mentioned would make the NCAA tournament every year.  
 \section*{Appendix}
 {\textbf{Summary output for full model:}}
 \footnotesize
@@ -636,6 +649,64 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 Residual standard error: 1.09 on 54 degrees of freedom
 Multiple R-squared:  0.3948,	Adjusted R-squared:  0.2827 
 F-statistic: 3.523 on 10 and 54 DF,  p-value: 0.001242
+\end{verbatim}
+The following output shows what predictors were included in model selection for the years 2004-2007.
+\begin{verbatim}
+>prev7 = addPriorYear(5,avgsZ,TRUE)
+>fit07 = lm(GP07~.,prev7[,-1])
+>fit07Adj <- lm(I(GP07^(-1/2))~.,prev7[,-1])
+>stepwise(fit07Adj,criterion = c("AIC"),direction=c("forward"))
+
+Call:
+lm(formula = I(GP07^(-1/2)) ~ avgTO07 + GP06 + avgBL07 + avgFG07, 
+data = prev7[, -1])
+
+Coefficients:
+(Intercept)      avgTO07         GP06      avgBL07      avgFG07  
+0.63417      0.05928     -0.03359     -0.03413     -0.01854  
+
+>prev6 = addPriorYear(4,avgsZ,TRUE)
+>fit06 = lm(GP06~.,prev6[,-1])
+>fit06Adj <- lm(I(GP06^(-1/2))~.,prev6[,-1])
+stepwise(fit06Adj,criterion = c("AIC"),direction=c("forward"))
+
+Call:
+lm(formula = I(GP06^(-1/2)) ~ avgFG06 + avgPF06, data = prev6[, 
+-1])
+
+Coefficients:
+(Intercept)      avgFG06      avgPF06  
+1.26121     -0.03868      0.03074  
+
+>prev5 = addPriorYear(3,avgsZ,TRUE)
+>fit05 = lm(GP05~.,prev5[,-1])
+>fit05Adj <- lm(I(GP05^(-1/2))~.,prev5[,-1])
+>stepwise(fit05Adj,criterion = c("AIC"),direction=c("forward"))
+
+Call:
+lm(formula = I(GP05^(-1/2)) ~ avgASS05 + avgRB05 + avgTO05 + 
+GP04 + avgSTL05, data = prev5[, -1])
+
+Coefficients:
+(Intercept)     avgASS05      avgRB05      avgTO05         GP04  
+1.235432    -0.027876    -0.003836     0.028163    -0.027761  
+avgSTL05  
+-0.026225  
+
+>prev4 = addPriorYear(2,avgsZ,TRUE)
+>fit04 = lm(GP04~.,prev4[,-1])
+>fit04Adj <- lm(I(GP04^(-1/2))~.,prev4[,-1])
+>stepwise(fit04Adj,criterion = c("AIC"),direction=c("forward"))
+
+Call:
+lm(formula = I(GP04^(-1/2)) ~ GP03 + avgFG04 + avgTO04 + avgASS04 + 
+avgBL04, data = prev4[, -1])
+
+Coefficients:
+(Intercept)         GP03      avgFG04      avgTO04     avgASS04  
+0.99228     -0.02435     -0.03831      0.03943      0.02559  
+avgBL04  
+-0.02695  
 \end{verbatim}
 
 \end{document}
