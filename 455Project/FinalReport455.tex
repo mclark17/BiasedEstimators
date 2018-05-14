@@ -650,7 +650,9 @@ Residual standard error: 1.09 on 54 degrees of freedom
 Multiple R-squared:  0.3948,	Adjusted R-squared:  0.2827 
 F-statistic: 3.523 on 10 and 54 DF,  p-value: 0.001242
 \end{verbatim}
-The following output shows what predictors were included in model selection for the years 2004-2007.
+\normalsize
+{\textbf{AIC/BIC Selection Output:}}
+\footnotesize
 \begin{verbatim}
 >prev7 = addPriorYear(5,avgsZ,TRUE)
 >fit07 = lm(GP07~.,prev7[,-1])
