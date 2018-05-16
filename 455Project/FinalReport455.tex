@@ -24,18 +24,18 @@
 
 \begin{abstract}
 \begin{center}
-	\noindent March Madness is an annual NCAA Division I Basketball tournament. The tournament occurs in the month of March, thereby earning its name. There are 64 teams in the tournament each year, seeded into four regions that each contain 16 teams. This report will look at how far each team makes it into the tournament, based on their regular season data and prior tournament success.
+	\noindent March Madness is an annual NCAA Division I Basketball tournament. The tournament occurs in the month of March, thereby earning its name. There are 64 teams in the tournament each year, seeded into four regions that each contain 16 teams. This report will look into how far each team makes it into the tournament, based on their regular season data and prior tournament success.
 \end{center}
 \end{abstract}
 
 \section*{Introduction}
-\noindent In this report we work with data that was obtained from kaggle.com. We were interested to see what factors most affect a team's success in the March Madness tournament, so we compare teams to each other for every year that we have data. In doing so, we narrow down our predictors to find the best model of a team's success in the tournament for each year.
+\noindent In this report, we work with data that was obtained from kaggle.com. We were interested to see what factors most affect a team's success in the March Madness tournament, so we compare teams to each other for every year that we have data. In doing so, we narrow down our predictors to find the best model of a team's success in the tournament for each year.
 
 \noindent We were motivated to look into this data in part because the tournament is so hard to predict from year to year. We wondered what statistics and data from a team's season and history could be used to estimate how far the team would make it in the tournament. It is not uncommon for there to be many upsets over the course of the tournament, which can throw off any model, so we had to consider this uncertainty when choosing the best model.
 \section*{Data Summary}
-From Kaggle's website, we downloaded a data set that gave us a look at all Division I teams who did or did not qualify for the March Madness tournament in the past 30 or so years. Each team is assigned a four digit code that is consistent from season to season and data set to data set. This allows us to manipulate and analyze the data across the different files.
+From Kaggle's website, we downloaded a data set that gave us a look at all Division I teams who did or did not qualify for the March Madness tournament in the past 30 years. Each team is assigned a four digit code that is consistent from season to season and data set to data set. This allows us to manipulate and analyze the data across the different files.
 
-We had data that was collected during the regular season and data that was collected during the tournament, but in the long run choose to focus our model on regular season data so as to be able to predict the current season's tournament success if need be.
+We had data that was collected during the regular season and data that was collected during the tournament, but in the long run we chose to focus our model on regular season data in order to be able to predict the current season's tournament success if needed.
 
 For the years 1985 to 2003, we have data in regards to the wins and losses of each involved team. For the years 2003 to 2016, we have more in depth data that includes each team's statistics from each game all season and throughout the tournament.
 
@@ -45,7 +45,7 @@ Because this tournament occurs each year, and because our data spans many years,
 
 Throughout this report, let the following be universally true:
 
-{\textbf {Field Goals:}} defined as any shot that is made in the game and is worth 2 points (within the 3 point line, not a free throw)
+{\textbf {Field Goals:}} defined as any shot that is made in the game, not a free throw)
 
 {\textbf {Three Pointers:}} defined as any shot that is made in the game and is worth 3 points (outside the 3 point line, from any place)
 
@@ -63,7 +63,7 @@ Throughout this report, let the following be universally true:
 
 {\textbf {Personal Fouls:}} defined as an action that results in either a loss of possession or free throws for the other team
 \section*{Pre-Analysis}
-We began by looking at our data from a lens that based winning teams against losing teams. This was based on who won and lost each game of each season, so it is important to note that it is likely that teams would fall into both categories on occasion. We hoped to find what factors and variables in a season could predict a team's overall success in the tournament and moving forward.
+We began by looking at our data from a lens that based winning teams against losing teams. This was based on who won and lost each game of each season, so it is important to note that it is likely that teams would fall into both categories over the course of each year. We hoped to find what factors and variables in a season could predict a team's overall success in the tournament.
 
 We already had easy access to data that was parsed based on which team had won and which team had lost, so this seemed like a logical first step. We chose to keep regular season data apart from tournament data because the game play is so different in the tournament. In general, it is expected that the involved teams are among the best in the country, and the games have much higher stakes, so statistics may look different.
 \subsection*{Regular Season Data}
@@ -83,9 +83,9 @@ We then looked at winning and losing teams' average shooting percentages for the
 	\centering
 	\includegraphics[scale=.5]{SeasonShotPercent.png}
 \end{figure}
-This figure visualizes the differences that exist, on average, in winning and losing teams' shot percentages. There are a large number of outliers in this plot, which should be noted for future analysis. It is also hard to tell which shots look to be more influential in the winning of a game because the data is so wide-spread.
+This figure visualizes the differences that exist, on average, in winning and losing teams' shot percentages. There are a large number of outliers in this plot, which should be noted for future analysis. It is also hard to tell which shots look to be more influential in winning a game because the data is so wide-spread.
 \subsection*{Checking Parameters for Normality}
-In order to test potential parameters for normality, we look at the QQ-plots. For field goal percentage, three point percentage, rebounds per game, and assists per game. Due to the large sample size, over 140,000, we do not anticiapte having issues due to the Central Limit Theorem.  
+In order to test potential parameters for normality, we look at the QQ-plots for field goal percentage, three point percentage, rebounds per game, and assists per game. Due to the large sample size, over 140,000, we do not anticiapte having issues due to the Central Limit Theorem.  
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=.6]{FGnorm.pdf}
@@ -93,9 +93,9 @@ In order to test potential parameters for normality, we look at the QQ-plots. Fo
 	\includegraphics[scale=.6]{rbnorm.pdf}
 	\includegraphics[scale=.6]{assnorm.pdf}
 \end{figure}
-The only parameter of concern here is the tails of the three point percentage. The minimum and maximum values of this value are 0 and 1, respectively. The issue here lies in the fact that there are several data points with these minimum and maximum values, but there is a gap of values just above the minimum and just below the maximum. For example, for a team to shoot 1 percent on three pointers, the team would have to only hit 1 and attempt 100. This is not plausible. However, a team can only attempt 5 three points and miss all of them, giving them a three point percentage of 0. The same analysis can be made for the maximum value. 
+The only parameter of concern here is the tails of the three point percentage. The minimum and maximum values of this value are 0 and 1, respectively. The issue here lies in the fact that there are several data points with these minimum and maximum values, but there is a gap of values just above the minimum and just below the maximum. For example, for a team to shoot exactly 1 percent on three pointers, the team would have to only hit 1 and attempt 100. This is not plausible. However, a team can only attempt 5 three points and miss all of them, giving them a three point percentage of 0. The same analysis can be made for the maximum value. 
 \subsection*{Tournament Data}
-Much the same as when we worked with the regular season data, we analyzed the tournament data at first on a more basic level of winning teams versus losing teams. Much of the data that we had for tournaments was centered on the teams' abilities to score. We analyzed their shooting percentages during the tournaments and compared average winning teams to average losing teams.
+Much of the same as when we worked with the regular season data, we analyzed the tournament data at first on a more basic level of winning teams versus losing teams. Much of the data that we had for tournaments was centered on the teams' abilities to score. We analyzed their shooting percentages during the tournaments and compared average winning teams to average losing teams.
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=.5]{TourneyShotPercent.png}
@@ -134,9 +134,9 @@ Seed is not included because seeding is almost entirely determined by conference
 \section*{Processing}
 In working with our data to develop a model, we realized that there may be a better way to interpret it. We also ran into problems with some predictors and variables because they were quite difficult to quantify or compare.
 
-We found that {\textit{daynum}} may not be the best measure of a team's success in the tournament because the respective games of a tournament are played on slightly different days each year. This means that the team who won the tournament in 2003 could have a higher daynum than the team who won the tournament in 2004, automatically ranking the 2003 team higher, although they played and won the same number of games.
+We found that {\textit{daynum}} may not be the best measure of a team's success in the tournament because the respective games of a tournament are played on different days each year. This means that the team who won the tournament in 2003 could have a higher daynum than the team who won the tournament in 2004, automatically ranking the 2003 team higher, although they played and won the same number of games.
 
-We also found that {\textit{conf}} was difficult to quantify because while some conferences are undoubtedly better than others, it is not up to our judgment as to decide how much better they are and which conferences deserve to be credited as the best.
+We also found that {\textit{conf}} was fairly difficult to quantify. The issues with this quantification are covered later in the paper.
 \subsection*{Data Plumbing \& Reconstruction}
 
 With all data sets, there must be some level of data plumbing involved. We had to modify and summarize certain statistics to get what we wanted. This also dealt with missing values.
@@ -168,7 +168,7 @@ We fit a full model with all of the possible predictors that we pulled from the 
 	\item 	{\textit{avgTO:}} average turnovers per team per game in regular season
 	\item 	{\textit{avgSTL:}} average steals per team per game in regular season
 	\item 	{\textit{avgBL:}} average blocks per team per game in regular season
-	\item 	{$GP_{year-1}$:} number of games the team plays in the tournament in the prior year
+	\item 	{$GP_{year-1}$:} number of games the team played in the tournament in the prior year
 	\end{itemize}
 We formed this model for each year from 2004 to 2015 because those are the years that we have the most data for, and we seek out the model with the highest $R^{2}$ value because it accounts for the most variation in the response. The coefficients and summary of some of the models are shown below:
 \footnotesize
@@ -349,13 +349,13 @@ qqnorm(fit09Adj$residuals)
 	\centering
 	\includegraphics[scale=.6]{2009Anorm.png}
 \end{figure}
-The residuals seem to follow a fairly Normal pattern, so we continue to move forward.
+The residuals seem to follow a fairly normal pattern, so we continue to move forward.
 \section*{Final Model}
 	\[
 Y_{GP_{year}}^{-0.5} = \beta_0 + \beta_{avgASS} +\beta_{avgFT} + \beta_{avgPF} + \beta_{avgFG} + \beta_{avgTO} + \beta_{GP_{year-1}}+ \epsilon 
 \]
 \section*{Final Model Analysis}
-Each predictor in the final model carries significant meaning with valuable interpretation. Average assists, free throws and field goals measure overall offensive power, while turnovers measures how careful the offense is. Assist to turnover ratio was found to be ineffective as this data variable was not distinguishable enough from team to team. Generally, the more assists a team has the more ball movement they have, the more prone they are to turning the ball over. Amongst March Madness bracket teams, the individual number of assists and turnovers proved to be more of a relevant statistic than assist to turnover ratio. Furthermore, the assist to turnover ratio is more precise and valuable in measuring a particular players effectiveness, for example a team's point guard. The remaining predictors are personal fouls and prior year success. Personal fouls is a measure of a team's defensive ability. This is not the best statistic for measuring a teams defensive capability, but it is for this data set. Prior year tournament success is the last predictor and is the most straight forward. There is tremendous correlation across time for teams making the tournament one year if they made it the previous year.
+Each predictor in the final model carries significant meaning with valuable interpretation. Average assists, free throws and field goals measure overall offensive power, while turnovers measures how careful the offense is. Assist to turnover ratio was found to be ineffective as this data variable was not distinguishable enough from team to team. Generally, the more assists a team has the more ball movement they have, the more prone they are to turning the ball over. Amongst March Madness bracket teams, the individual number of assists and turnovers proved to be more of a relevant statistic than assist to turnover ratio. Furthermore, the assist to turnover ratio is more precise and valuable in measuring a particular players effectiveness, for example a team's point guard. The remaining predictors are personal fouls and prior year success. Personal fouls is a measure of a team's defensive ability. This is not the best statistic for measuring a teams defensive capability, but it is for this data set. Prior year tournament success is the last predictor and is the most straight forward. There is tremendous correlation across time for teams making the tournament from year to year.
 
 We ran the summary function on this model and the output is shown below:
 \footnotesize
@@ -388,7 +388,7 @@ Multiple R-squared:  0.5247,	Adjusted R-squared:  0.4755
 F-statistic: 10.67 on 6 and 58 DF,  p-value: 5.829e-08
 \end{verbatim}
 \normalsize
-This model has an Adjusted $R^{2}$ of 0.4755, which is a higher than the full 2009 model, and it contains the predictors that were seen most often in all of the years of data. Three predictors and the intercept are significant in this model. This model explains the most variation and contains predictors that encompass all of the models, so it is out choice moving forward.
+This model has an Adjusted $R^{2}$ of 0.4755, which is a higher than the full 2009 model, and it contains the predictors that were seen most often in all of the years of data (we ran similar diagnostic tests for every year we had data for in order to see what the most common predictors were). Three predictors and the intercept are significant in this model. This model explains the most variation and contains predictors that encompass all of the models, so it is out choice moving forward.
 \section*{Predictions}
 We used our model to predict for two teams to test it's predictive power. We tested for Duke and Albany.
 \footnotesize
@@ -406,12 +406,12 @@ Albany
 \normalsize
 It turned out that these predictions were fairly accurate for Duke, who played 3 games in the 2009 season, although the prediction was a little off for Albany, who didn't make the tournament in the 2009 season.
 
-We found that our model was better at predicting for teams who frequently make the tournament. In the above example, both teams had similar stats, aside from games played in the previous season. However, if teams do not often show, they are seeded lower and are often less likely to progress in the tournament. This could be due to a number of things: the teams have more experience playing in high stakes games, they are more popular and able to recruit talented, young players, they may have more consistent coaching staff to work with, etc.
+We found that our model was better at predicting for teams who frequently make the tournament. In the above example, both teams had similar stats, aside from games played in the previous season. However, if teams do not often appear in the tournament, they are seeded lower and are therefore less likely to progress in the tournament. This could be due to a number of things: the teams have more experience playing in high stakes games, they are more popular and able to recruit talented, young players, they may have more consistent coaching staff to work with, etc.
 
 \section*{Further Research}
 Further research that would likely have more prediction power would incorporate advanced sports statistics. The most important improvement in the model could be defensive metrics. As far as stat sheet statistics go for defense, the only measurable statistics are bocks, steals, and personal fouls. Blocks and steals do not occur many times in a game, the  player that leads the league in either category typically does not average more than four per game. In the past ten years, a great deal of advancements in statistical analysis have paved the way for new defensive metrics for a basketball team. A common statistic is points allowed per 100 possessions. The team with the fewest points allowed per 100 possessions would be classified as the team with the lowest scoring defense. Unfortunately, in our data set, we could not formulate any advanced defensive statistics.
 
-Another predictor we would like to have in the future is a measure of conference. This was expressed in our initial, hypothetical model but not in our final model. In NCAA basketball, specific conferences have more high quality teams. These teams are more likely to make the tournament even if their record is inferior to other teams in other conferences. There are a total of 32 conferences for the 2017-2018 season, but only 7 of them make up the majority of NCAA tournament teams: Big 12, ACC, Big East, Big Ten, SEC, The American, and the Pac-12. Every  year multiple teams from these conferences make the tournament. This cannot be said for all conferences. For example, Binghamton's basketball team lies in the American East conference. Only the winner of this conference typically makes the tournament. Future models should incorporate some kind of dummy variable to account for this variation. A predictor variable "conference" could be added. Teams in these conferences would be assigned a value of 1 while other teams would be assigned a value of zero. This would help the prediction of the model, due to the fact that two teams in different conferences can have very similar statistics on paper, but one will make the tournament and one will not. A good example of this was this year's Vermont team in the American East conference. Vermont had a 27-8 overall record, but failed to make the NCAA tournament due to their loss in the American East tournament. Teams with this record in the seven conferences previously mentioned would make the NCAA tournament every year. Only one team in the modern NCAA tournament era, 1985-present, won the tournament outside of these seven conferences, which was UNLV in 1990. Interestingly enough, three players from this team were selected in the first 12 picks of the NBA draft the next year, including the number one overall pick.   
+Another predictor we would like to have in the future is a measure of conference. This was expressed in our initial, hypothetical model but not in our final model. In NCAA basketball, specific conferences have more high quality teams. These teams are more likely to make the tournament even if their record is inferior to other teams in other conferences. There are a total of 32 conferences for the 2017-2018 season, but only 7 of them make up the majority of NCAA tournament teams: Big 12, ACC, Big East, Big Ten, SEC, The American, and the Pac-12. Every  year multiple teams from these conferences make the tournament. This cannot be said for all conferences. For example, Binghamton's basketball team lies in the American East conference. Only the winner of this conference typically makes the tournament, and when they do they are usually seeded no higher than 10. Future models should incorporate some kind of dummy variable to account for this variation. A predictor variable "conference" could be added. Teams in these conferences would be assigned a value of 1 while other teams would be assigned a value of zero. One issue we had with doing this was teams change conferences across time, making it very difficult to track. However, this would help the prediction of the model, due to the fact that two teams in different conferences can have very similar statistics on paper, but one will make the tournament and one will not. A good example of this was this year's Vermont team in the American East conference. Vermont had a 27-8 overall record, but failed to make the NCAA tournament due to their loss in the American East tournament. Teams with this record in the seven conferences previously mentioned would make the NCAA tournament every year. Only one team in the modern NCAA tournament era, 1985-present, won the tournament outside of these seven conferences, which was UNLV in 1990. Interestingly enough, three players from this team were selected in the first 12 picks of the NBA draft the next year, including the number one overall pick.   
 \section*{Appendix}
 {\textbf{Summary output for full model:}}
 \footnotesize
