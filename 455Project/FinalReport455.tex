@@ -137,8 +137,18 @@ In working with our data to develop a model, we realized that there may be a bet
 We found that {\textit{daynum}} may not be the best measure of a team's success in the tournament because the respective games of a tournament are played on slightly different days each year. This means that the team who won the tournament in 2003 could have a higher daynum than the team who won the tournament in 2004, automatically ranking the 2003 team higher, although they played and won the same number of games.
 
 We also found that {\textit{conf}} was difficult to quantify because while some conferences are undoubtedly better than others, it is not up to our judgment as to decide how much better they are and which conferences deserve to be credited as the best.
-\subsection*{Data Plumbing}
-\subsection*{Data Reconstruction}
+\subsection*{Data Plumbing \& Reconstruction}
+
+With all data sets, there must be some level of data plumbing involved. We had to modify and summarize certain statistics to get what we wanted. This also dealt with missing values.
+
+The missing values were usually not a big concern. Some teams were D1 in the 80s, then dropped to D2, and then came back. Fortunately for us, only D1 teams can participate in the tournament, so there wouldnt be issues of missing data going into the tournament as we only needed to focus on the teams that made it.
+
+The second thing was to organize our data into a format we could easily operate with. We accomplished this by sorting our data into each years respective data both compact and detailed results and combining it with the current years teams that played in the tournament.
+
+Moving further we then had to take some averages so that we could easily represent a teams ability. Each game was too fine of a granularity. So averages were computed for each years games and teams then substituted those values into our yearly tables. These tables rows would hold all teams that played that year in the tournament.
+
+Finally we had to resolve the daynum issue. To compensate, we created a method to count the number of games played by each team in a tournament for any given season. Thus, teams would play a minimum of 1 game if they lost and 6 games if they made it to finals. This equally represents all the teams rather than the original daynum.
+
 \section*{Full Model}
 	\[
 Y_{GP_{year}} = \beta_0 + \beta_{avgScore} + \beta_{avgASS} +\beta_{avgFT} + \beta_{avgPF} + \beta_{avgTP} + \beta_{avgRB} + \beta_{avgTO}
