@@ -1,3 +1,5 @@
+rm(list=ls())
+setwd("C:/Users/Molly/Documents/GitHub/BiasedEstimators/455Project")
 tourneyData = read.csv("03to15Data.csv")
 avgData = read.csv("03to16.csv")
 teamInfo = read.csv("Teams.csv")
