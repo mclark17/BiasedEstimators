@@ -137,8 +137,18 @@ In working with our data to develop a model, we realized that there may be a bet
 We found that {\textit{daynum}} may not be the best measure of a team's success in the tournament because the respective games of a tournament are played on slightly different days each year. This means that the team who won the tournament in 2003 could have a higher daynum than the team who won the tournament in 2004, automatically ranking the 2003 team higher, although they played and won the same number of games.
 
 We also found that {\textit{conf}} was difficult to quantify because while some conferences are undoubtedly better than others, it is not up to our judgment as to decide how much better they are and which conferences deserve to be credited as the best.
-\subsection*{Data Plumbing}
-\subsection*{Data Reconstruction}
+\subsection*{Data Plumbing \& Reconstruction}
+
+With all data sets, there must be some level of data plumbing involved. We had to modify and summarize certain statistics to get what we wanted. This also dealt with missing values.
+
+The missing values were usually not a big concern. Some teams were D1 in the 80s, then dropped to D2, and then came back. Fortunately for us, only D1 teams can participate in the tournament, so there wouldnt be issues of missing data going into the tournament as we only needed to focus on the teams that made it.
+
+The second thing was to organize our data into a format we could easily operate with. We accomplished this by sorting our data into each years respective data both compact and detailed results and combining it with the current years teams that played in the tournament.
+
+Moving further we then had to take some averages so that we could easily represent a teams ability. Each game was too fine of a granularity. So averages were computed for each years games and teams then substituted those values into our yearly tables. These tables rows would hold all teams that played that year in the tournament.
+
+Finally we had to resolve the daynum issue. To compensate, we created a method to count the number of games played by each team in a tournament for any given season. Thus, teams would play a minimum of 1 game if they lost and 6 games if they made it to finals. This equally represents all the teams rather than the original daynum.
+
 \section*{Full Model}
 	\[
 Y_{GP_{year}} = \beta_0 + \beta_{avgScore} + \beta_{avgASS} +\beta_{avgFT} + \beta_{avgPF} + \beta_{avgTP} + \beta_{avgRB} + \beta_{avgTO}
@@ -285,7 +295,7 @@ boxcox(fit09, plotit = TRUE)
 	\centering
 	\includegraphics[scale=.6]{2009box.png}
 \end{figure}
-The boxcox graph shows that we should raise the response to the -$\frac{1}{2}$, so we adjust the model and replot the residuals.
+The boxcox graph shows that we should raise the response to the -$\frac{1}{2}$, so we adjust the model and re-plot the residuals.
 \footnotesize
 \begin{verbatim}
 fit09Adj <- lm(I(GP09^(-1/2))~.,prev9[,-1])
@@ -345,11 +355,63 @@ The residuals seem to follow a fairly Normal pattern, so we continue to move for
 Y_{GP_{year}}^{-0.5} = \beta_0 + \beta_{avgASS} +\beta_{avgFT} + \beta_{avgPF} + \beta_{avgFG} + \beta_{avgTO} + \beta_{GP_{year-1}}+ \epsilon 
 \]
 \section*{Final Model Analysis}
-Each predictor in the final model carries significant meaning with valuable interpretation. Average assists, free throws and field goals measure overall offensive power, while turnovers measures how careful the offense is. Assist to turnover ratio was found to be ineffective as this data variable was not distinguishable enough from team to team. Generally, the more assists a team has the more ball movement they have, the more prone they are to turning the ball over. Amongst march madness bracket teams, the individual number of assists and turnovers proved to be more of a relevant statistic than assist to turnover ratio. Furthermore, the assist to turnover ratio is more precise and valuable in measuring a particular players effectiveness, for example a team's point guard. The remaining predictors are personal fouls and prior year success. Personal fouls is a measure of a team's defensive ability. This is not the best statistic for measuring a teams defensive capability, but it is for this data set. Prior year tournament success is the last predictor and is the most straight forward. There is tremendous correlation across time for teams making the tournament one year if they made it the previous year.   
+Each predictor in the final model carries significant meaning with valuable interpretation. Average assists, free throws and field goals measure overall offensive power, while turnovers measures how careful the offense is. Assist to turnover ratio was found to be ineffective as this data variable was not distinguishable enough from team to team. Generally, the more assists a team has the more ball movement they have, the more prone they are to turning the ball over. Amongst March Madness bracket teams, the individual number of assists and turnovers proved to be more of a relevant statistic than assist to turnover ratio. Furthermore, the assist to turnover ratio is more precise and valuable in measuring a particular players effectiveness, for example a team's point guard. The remaining predictors are personal fouls and prior year success. Personal fouls is a measure of a team's defensive ability. This is not the best statistic for measuring a teams defensive capability, but it is for this data set. Prior year tournament success is the last predictor and is the most straight forward. There is tremendous correlation across time for teams making the tournament one year if they made it the previous year.
+
+We ran the summary function on this model and the output is shown below:
+\footnotesize
+\begin{verbatim}
+> fit09Adj2 = lm(GP09~GP08+avgASS09+avgFT09+avgPF09+avgSTL09+avgScore09,prev9[,-1])
+> summary(fit09Adj2)
+
+Call:
+lm(formula = GP09 ~ GP08 + avgASS09 + avgFT09 + avgPF09 + avgSTL09 + 
+avgScore09, data = prev9[, -1])
+
+Residuals:
+Min       1Q   Median       3Q      Max 
+-1.61295 -0.70409 -0.09138  0.48096  2.81927 
+
+Coefficients:
+Estimate Std. Error t value Pr(>|t|)    
+(Intercept) -1.14986    2.38317  -0.482 0.631271    
+GP08         0.28555    0.07462   3.826 0.000321 ***
+avgASS09     0.36007    0.10294   3.498 0.000908 ***
+avgFT09      0.32947    0.08863   3.717 0.000455 ***
+avgPF09     -0.14265    0.08185  -1.743 0.086682 .  
+avgSTL09     0.18756    0.11075   1.694 0.095708 .  
+avgScore09  -0.08360    0.04462  -1.873 0.066046 .  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.9317 on 58 degrees of freedom
+Multiple R-squared:  0.5247,	Adjusted R-squared:  0.4755 
+F-statistic: 10.67 on 6 and 58 DF,  p-value: 5.829e-08
+\end{verbatim}
+\normalsize
+This model has an Adjusted $R^{2}$ of 0.4755, which is a higher than the full 2009 model, and it contains the predictors that were seen most often in all of the years of data. Three predictors and the intercept are significant in this model. This model explains the most variation and contains predictors that encompass all of the models, so it is out choice moving forward.
 \section*{Predictions}
+We used our model to predict for two teams to test it's predictive power. We tested for Duke and Albany.
+\footnotesize
+\begin{verbatim}
+Duke:
+> predict(fit09Adj2, predset09, interval="predict")
+       fit      lwr      upr
+  3.145849 1.042621 5.249077
+  
+Albany
+> predict(fit09Adj2, predset, interval="predict")
+       fit       lwr      upr
+  2.189929 0.2506521 4.129206
+\end{verbatim}
+\normalsize
+It turned out that these predictions were fairly accurate for Duke, who played 3 games in the 2009 season, although the prediction was a little off for Albany, who didn't make the tournament in the 2009 season.
+
+We found that our model was better at predicting for teams who frequently make the tournament. In the above example, both teams had similar stats, aside from games played in the previous season. However, if teams do not often show, they are seeded lower and are often less likely to progress in the tournament. This could be due to a number of things: the teams have more experience playing in high stakes games, they are more popular and able to recruit talented, young players, they may have more consistent coaching staff to work with, etc.
+
 \section*{Further Research}
-Further research that would likely have more prediction power would incorporate advanced sports statistics. The most important improvement in the model could be defensive metrics. As far as stat sheet statistics go for defense, the only measureable statistics are bocks, steals, and personal fouls. Blocks and steals do not occur many times in a game, the  player that leads the league in either category typically does not average more than four per game. In the past ten years, a great deal of advancements in statistical analysis have paved the way for new defensive metrics for a basketball team. A common statistic is points allowed per 100 possesions. The team with the fewest points allowed per 100 possesions would be classified as the team with the lowest scoting defense. Unfortuantely, in our data set, we could not formulate any advanced defensive statitics.\\
-Another predictor we would like to have in the future is a measure of conference. This was expressed in our initial, hypothetical model but not in our final model. In NCAA basketball, specific conferences have more high quality teams. These teams are more likely to make the tournament even if their record is inferior to other teams in other conferences. There are a total of 32 conferences for the 2017-2018 season, but only 7 of them make up the majority of NCAA tournament teams: Big 12, ACC, Big East, Big Ten, SEC, The American, and the Pac-12. Every  year multiple teams from these conferences make the tournament. This cannot be said for all conferences. For example, Binghamton's basketball team lies in the American East conference. Only the winner of this conference typically makes the tournament. Future models should incoporate some kind of dummy variable to account for this variation. A predictor variable "conference" could be added. Teams in these conferences would be assigned a value of 1 while other teams would be assinged a value of zero. This would help the prediction of the model, due to the fact that two teams in different conferences can have very simialr statistics on paper, but one will make the tournament and one will not. A good example of this was this year's Vermont team in the American East conference. Vermont had a 27-8 overall record, but failed to make the NCAA tournament due to their loss in the American East tournament. Teams with this record in the seven conferecnes previously mentioned would make the NCAA tournament every year. Only one team in the modern NCAA tournament era, 1985-present, won the tournament outside of these seven conferences, which was UNLV in 1990. Interestingly enough, three players from this team were selected in the first 12 picks of the NBA draft the next year, including the number one overall pick.   
+Further research that would likely have more prediction power would incorporate advanced sports statistics. The most important improvement in the model could be defensive metrics. As far as stat sheet statistics go for defense, the only measurable statistics are bocks, steals, and personal fouls. Blocks and steals do not occur many times in a game, the  player that leads the league in either category typically does not average more than four per game. In the past ten years, a great deal of advancements in statistical analysis have paved the way for new defensive metrics for a basketball team. A common statistic is points allowed per 100 possessions. The team with the fewest points allowed per 100 possessions would be classified as the team with the lowest scoring defense. Unfortunately, in our data set, we could not formulate any advanced defensive statistics.
+
+Another predictor we would like to have in the future is a measure of conference. This was expressed in our initial, hypothetical model but not in our final model. In NCAA basketball, specific conferences have more high quality teams. These teams are more likely to make the tournament even if their record is inferior to other teams in other conferences. There are a total of 32 conferences for the 2017-2018 season, but only 7 of them make up the majority of NCAA tournament teams: Big 12, ACC, Big East, Big Ten, SEC, The American, and the Pac-12. Every  year multiple teams from these conferences make the tournament. This cannot be said for all conferences. For example, Binghamton's basketball team lies in the American East conference. Only the winner of this conference typically makes the tournament. Future models should incorporate some kind of dummy variable to account for this variation. A predictor variable "conference" could be added. Teams in these conferences would be assigned a value of 1 while other teams would be assigned a value of zero. This would help the prediction of the model, due to the fact that two teams in different conferences can have very similar statistics on paper, but one will make the tournament and one will not. A good example of this was this year's Vermont team in the American East conference. Vermont had a 27-8 overall record, but failed to make the NCAA tournament due to their loss in the American East tournament. Teams with this record in the seven conferences previously mentioned would make the NCAA tournament every year. Only one team in the modern NCAA tournament era, 1985-present, won the tournament outside of these seven conferences, which was UNLV in 1990. Interestingly enough, three players from this team were selected in the first 12 picks of the NBA draft the next year, including the number one overall pick.   
 \section*{Appendix}
 {\textbf{Summary output for full model:}}
 \footnotesize
